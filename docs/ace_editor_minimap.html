@@ -2320,29 +2320,30 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ext-spellcheck.min.js"></script>
   
     <script>
-      var editor = ace.edit("editor");
+    
+    var editor = ace.edit("editor");
     editor.setTheme("ace/theme/vibrant_ink");
     editor.session.setMode("ace/mode/html");
-    //editor.setValue(` source nothing  `);
+    // editor.setValue(` source nothing  `);
     editor.setFontSize(18);
- var Range = ace.require('ace/range').Range // get reference to ace/range
-ace.require("ace/ext/language_tools");
-  ace.require('ace/ext/ext-linking'); // not sure if this is correct ace/ext/linking
+    var Range = ace.require('ace/range').Range // get reference to ace/range
+    ace.require("ace/ext/language_tools");
+    ace.require('ace/ext/ext-linking'); // not sure if this is correct ace/ext/linking
 
-	editor.setOptions({
-		// -- ext-language_tools --
-	  enableBasicAutocompletion: true,
-		enableLiveAutocompletion: true,
-		enableSnippets: true, // for pre-defined auto-completion snippets
-		// --
-		enableLinking: true,
-		// --
-		enableFreeSpacePreviews: true,
-	});
+	  editor.setOptions({
+		    // -- ext-language_tools --
+	      enableBasicAutocompletion: true,
+		    enableLiveAutocompletion: true,
+		    enableSnippets: true, // for pre-defined auto-completion snippets
+		    // --
+		    enableLinking: true,
+		    // --
+		    enableFreeSpacePreviews: true,
+	  });
 
 
-editor.selection.clearSelection();
-var myTimeout;
+    editor.selection.clearSelection();
+    var myTimeout;  // for update timeout minimap
 
 
 // on change big editor change content minimap editor 5 sec delay of no change
@@ -2356,12 +2357,18 @@ editor.getSession().on('change', function () {
         minimapeditor.selection.clearSelection();
     }, 5000);
 
-    ace.edit("editor").focus(); //To focus the ace editor
+    ace.edit("editor").focus(); // To focus the ace editor
     ace.edit("editor").renderer.$cursorLayer.showCursor();
 
 });
 
 
+
+
+
+
+
+// minimaoeditor
   var minimapeditor = ace.edit("minimapeditor");
   minimapeditor.setTheme("ace/theme/vibrant_ink");
   minimapeditor.setFontSize(2.6);
@@ -2379,29 +2386,24 @@ editor.getSession().on('change', function () {
 
 
 // get linenumeber on minimap mouseclick
-   minimapeditor.on('mousedown', () => {
-         
-
-
- 
-
-  
+minimapeditor.on('mousedown', () => {
+    // mouseup works better?         
 });
 
 minimapeditor.on('mouseup', () => {       // var cursor = minimapeditor.getCursorPosition();
     var cursorrow = minimapeditor.getCursorPosition().row;
-     var cursorcolumn = minimapeditor.getCursorPosition().column;
-    //var cursorPos = $scope.editor.getCursorPosition()
+    var cursorcolumn = minimapeditor.getCursorPosition().column;
+    // var cursorPos = $scope.editor.getCursorPosition()
     
     // move cursorr big editor to cursor pos minimapeditor
     ace.edit("editor").gotoLine(cursorrow,cursorcolumn);
     ace.edit("editor").moveCursorTo(cursorrow,cursorcolumn);
     console.log("getcursor row",cursorrow );
-     minimapeditor.selection.clearSelection();
+    minimapeditor.selection.clearSelection();
 
-  //const collection = document.getElementsByClassName("ace_gutter-cell ");
-  //console.log("collection[0] ",collection[0]);
-   minimapeditor.selection.clearSelection();
+    // const collection = document.getElementsByClassName("ace_gutter-cell ");
+    // console.log("collection[0] ",collection[0]);
+    minimapeditor.selection.clearSelection();
 });
 
 
@@ -2448,12 +2450,12 @@ function save() {
     wholeWord: true,
     regExp: false,
     preventScroll: true // do not change selection
-})
-range.start.column = 0
-range.end.column = Number.MAX_VALUE
-editor.session.replace(range, "<center>Made with Electra<br><a href=\"https://plnkr.co/plunk/dqcdy6hSIj8lU0jg\" target=\"Electric_Storm\">Electra Electric Storm CloudWriter</a><br><br></center>" + editor.session.getLine(range.start.row) + "")
-editor.selection.setRange(range)
-      download('Electric_Storm.html', editor.getValue());
+  })
+  range.start.column = 0
+  range.end.column = Number.MAX_VALUE
+  editor.session.replace(range, "<center>Made with Electra<br><a href=\"https://plnkr.co/plunk/dqcdy6hSIj8lU0jg\" target=\"Electric_Storm\">Electra Electric Storm CloudWriter</a><br><br></center>" + editor.session.getLine(range.start.row) + "")
+  editor.selection.setRange(range)
+  download('Electric_Storm.html', editor.getValue());
 }
 
 // download part of https://codepen.io/8354801/pen/OeOBXm
@@ -2475,33 +2477,34 @@ function download(filename, text) {
 
  editor.on('mousedown', () => {
          
-       // var cursor = minimapeditor.getCursorPosition();
-   // var cursorrow = minimapeditor.getCursorPosition().row;
-   //  var cursorcolumn = minimapeditor.getCursorPosition().column;
-    //var cursorPos = $scope.editor.getCursorPosition()
+    // var cursor = minimapeditor.getCursorPosition();
+    // var cursorrow = minimapeditor.getCursorPosition().row;
+    // var cursorcolumn = minimapeditor.getCursorPosition().column;
+    // var cursorPos = $scope.editor.getCursorPosition()
     
     // move cursorr big editor to cursor pos minimapeditor
-   // ace.edit("editor").gotoLine(cursorrow,cursorcolumn);
-   // ace.edit("editor").moveCursorTo(cursorrow,cursorcolumn);
-   // console.log("getcursor row",cursorrow );
+    // ace.edit("editor").gotoLine(cursorrow,cursorcolumn);
+    // ace.edit("editor").moveCursorTo(cursorrow,cursorcolumn);
+    // console.log("getcursor row",cursorrow );
 
 
-// onclick get first line of active editor window
-// maybe for set minimap window to that cursur location
-// but i get some span code now also
-      const collection = document.getElementsByClassName("ace_gutter-cell ");
-  console.log("collection[0] ",collection[0]);
-
-  
+    // onclick get first line of active editor window
+    // maybe for set minimap window to that cursur location
+    // but i get some span code now also
+     
+     // const collection = document.getElementsByClassName("ace_gutter-cell ");
+     // console.log("collection[0] ",collection[0]);
 });
+
+
 
 var marker;
 // main editor info on scroll
 // set minimap linenuber from editor onscroll
 editor.session.on("changeScrollTop", function() {
-   minimapeditor.selection.clearSelection();
-    const collection = document.getElementsByClassName("ace_gutter-cell ");
-    console.log("collection[0] ",collection[0].innerHTML);
+     minimapeditor.selection.clearSelection();
+     const collection = document.getElementsByClassName("ace_gutter-cell ");
+     console.log("collection[0] ",collection[0].innerHTML);
 
     // strip html from innerhtml to get linenumber
     // should be a better way to get toplinenumber from current view
@@ -2509,26 +2512,27 @@ editor.session.on("changeScrollTop", function() {
     console.log("currentlinenr ",currentlinenr);
 
 
-    //minimapeditor.scrollToLine(currentlinenr, true, true, function () {});
+    // minimapeditor.scrollToLine(currentlinenr, true, true, function () {});
     ace.edit("minimapeditor").moveCursorTo(currentlinenr);
     ace.edit("minimapeditor").gotoLine(currentlinenr);
 
-    //minimapeditor.selection.selectLine();
-    //minimapeditor.selection.selectLine(currentlinenr+1);
-    //minimapeditor.selection.selectLine(currentlinenr+2);
+    // minimapeditor.selection.selectLine();
+    // minimapeditor.selection.selectLine(currentlinenr+1);
+    // minimapeditor.selection.selectLine(currentlinenr+2);
     
-    editor.setAutoScrollEditorIntoView(true) 
+    editor.setAutoScrollEditorIntoView(true)
+    minimapeditor.setAutoScrollEditorIntoView(true)
 
-	console.log("getFirstVisibleRow",editor.renderer.getFirstVisibleRow());
-					console.log("getLastVisibleRow",editor.renderer.getLastVisibleRow());
-					let nr_lines_vissible = editor.renderer.getLastVisibleRow() - editor.renderer.getFirstVisibleRow(); 
-document.getElementsByClassName("ace_map").innerHTML = "<div id='ace_map' style='top:" +  (map_range(editor.renderer.getFirstVisibleRow() ,0,editor.session.getLength()+nr_lines_vissible, 0,100)) + "%'></div>";
+	    // console.log("getFirstVisibleRow",editor.renderer.getFirstVisibleRow());
+			// console.log("getLastVisibleRow",editor.renderer.getLastVisibleRow());
+			// let nr_lines_vissible = editor.renderer.getLastVisibleRow() - editor.renderer.getFirstVisibleRow(); 
+      // document.getElementsByClassName("ace_map").innerHTML = "<div id='ace_map' style='top:" +  (map_range(editor.renderer.getFirstVisibleRow() ,0,editor.session.getLength()+nr_lines_vissible, 0,100)) + "%'></div>";
 
+
+// editor view to selection on minimap
  minimapeditor.session.removeMarker(marker);
-  //  setTimeout(function() {
-   marker=minimapeditor.session.addMarker(new Range(editor.renderer.getFirstVisibleRow(), 0, editor.renderer.getLastVisibleRow(), 0), "ace_active-line", "fullLine");
-     //editor.addMarker(new Range(1, 5, 9, 5), "foo", "line");
-  //  }, 100);
+ marker=minimapeditor.session.addMarker(new Range(editor.renderer.getFirstVisibleRow(), 0, editor.renderer.getLastVisibleRow(), 0), "ace_active-line", "fullLine");
+
 
 })
 
