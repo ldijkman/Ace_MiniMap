@@ -2365,7 +2365,7 @@ editor.getSession().on('change', function () {
     clearTimeout(myTimeout); // clear if new change
     myTimeout = setTimeout(function(){
         minimapeditor.setValue(editor.getSession().getValue());
-        //minimapeditor.selection.clearSelection();
+        minimapeditor.selection.clearSelection();
     }, 5000);
 
     ace.edit("editor").focus(); // To focus the ace editor
@@ -2417,11 +2417,12 @@ minimapeditor.on('mouseup', () => {       // var cursor = minimapeditor.getCurso
 
   
     minimapeditor.scrollToLine(cursorrow, true, true, function () {});
-    ace.edit("minimapeditor").moveCursorTo(cursorrow,cursorcolumn);
+    ace.edit("minimapeditor").moveCursorTo(editor.getCursorPosition());
     ace.edit("minimapeditor").gotoLine(cursorrow,cursorcolumn);
     minimapeditor.setAutoScrollEditorIntoView(true)
+    
      minimapeditor.session.removeMarker(marker);
- marker=minimapeditor.session.addMarker(new Range(editor.renderer.getFirstVisibleRow(), 0, editor.renderer.getLastVisibleRow(), 0), "ace_active-line", "fullLine");
+ //marker=minimapeditor.session.addMarker(new Range(editor.renderer.getFirstVisibleRow(), 0, editor.renderer.getLastVisibleRow(), 0), "ace_active-line", "fullLine");
 
 
 
