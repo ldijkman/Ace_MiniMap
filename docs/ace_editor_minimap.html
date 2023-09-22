@@ -2316,7 +2316,17 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ext-spellcheck.min.js"></script>
   
+    
+    
+    
+    
+    
     <script>
+
+
+///////////////////////////////////////////////////
+// main  editor
+//////////////////////////////////////////////////
     
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/vibrant_ink");
@@ -2343,15 +2353,19 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
     var myTimeout;  // for update timeout minimap
 
 
-// on change big editor change content minimap editor 5 sec delay of no change
+
+
+
+
+// on change main big editor change content minimap editor 5 sec delay of no change
 editor.getSession().on('change', function () {
 
     // timeout here?
     // update minimap after 5 seconds no change (update every keypres makes editor slow) 
-    clearTimeout(myTimeout);
+    clearTimeout(myTimeout); // clear if new change
     myTimeout = setTimeout(function(){
         minimapeditor.setValue(editor.getSession().getValue());
-        minimapeditor.selection.clearSelection();
+        //minimapeditor.selection.clearSelection();
     }, 5000);
 
     ace.edit("editor").focus(); // To focus the ace editor
@@ -2364,8 +2378,9 @@ editor.getSession().on('change', function () {
 
 
 
-
+//////////////////////////////////////////////////////////
 // minimaoeditor
+//////////////////////////////////////////////////////////
   var minimapeditor = ace.edit("minimapeditor");
   minimapeditor.setTheme("ace/theme/vibrant_ink");
   minimapeditor.setFontSize(2.6);
@@ -2392,15 +2407,12 @@ minimapeditor.on('mouseup', () => {       // var cursor = minimapeditor.getCurso
     var cursorcolumn = minimapeditor.getCursorPosition().column;
     // var cursorPos = $scope.editor.getCursorPosition()
     
-    // move cursorr big editor to cursor pos minimapeditor
+    // move cursorr big editor to cursor rom clickpos minimapeditor
     ace.edit("editor").gotoLine(cursorrow,cursorcolumn);
     ace.edit("editor").moveCursorTo(cursorrow,cursorcolumn);
     console.log("getcursor row",cursorrow );
-    minimapeditor.selection.clearSelection();
+    //minimapeditor.selection.clearSelection();
 
-    // const collection = document.getElementsByClassName("ace_gutter-cell ");
-    // console.log("collection[0] ",collection[0]);
-    minimapeditor.selection.clearSelection();
 });
 
 
@@ -2491,6 +2503,8 @@ function download(filename, text) {
      
      // const collection = document.getElementsByClassName("ace_gutter-cell ");
      // console.log("collection[0] ",collection[0]);
+     minimapeditor.selection.clearSelection();
+     minimapeditor.selection.selectLine();
 });
 
 
@@ -2499,7 +2513,7 @@ var marker;
 // main editor info on scroll
 // set minimap linenuber from editor onscroll
 editor.session.on("changeScrollTop", function() {
-     minimapeditor.selection.clearSelection();
+     //minimapeditor.selection.clearSelection();
      // const collection = document.getElementsByClassName("ace_gutter-cell ");
      // console.log("collection[0] ",collection[0].innerHTML);
 
@@ -2517,7 +2531,8 @@ editor.session.on("changeScrollTop", function() {
     ace.edit("minimapeditor").gotoLine(currentlinenr);
     minimapeditor.setAutoScrollEditorIntoView(true)
 
-    // minimapeditor.selection.selectLine();
+      // minimapeditor.selection.clearSelection();
+     // minimapeditor.selection.selectLine();
     // minimapeditor.selection.selectLine(currentlinenr+1);
     // minimapeditor.selection.selectLine(currentlinenr+2);
     
