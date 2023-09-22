@@ -102,6 +102,18 @@ This Document Will Be Removed.-->
 #minimapeditor .ace_scrollbar-h {
     display: none;
 }
+
+			
+#ace_map {
+  z-index: 100000;
+	position: absolute;
+	top: ;
+height: 150px;
+width: 150px;
+	background: darkgray;
+  opacity:50%;
+}
+
 overscroll-behavior: none;
 </style>
   
@@ -112,7 +124,7 @@ overscroll-behavior: none;
 
 
 <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-<div id="editor" onmouseover="ace.edit("editor").focus();">
+<div id="editor" onmouseover='ace.edit("editor").focus();'>
 <textarea>
 <!--
 
@@ -2265,8 +2277,12 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
 
 </div>
 <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-<div id="minimapeditor" onmouseover="ace.edit("minimapeditor").focus();"></div>
+<div id="minimapeditor" onmouseover='ace.edit("minimapeditor").focus();'>
 
+ 
+</div>
+  <div class='ace_map'></div>
+ 
 
 
 
@@ -2309,6 +2325,8 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
     editor.session.setMode("ace/mode/html");
     //editor.setValue(` source nothing  `);
     editor.setFontSize(18);
+ var Range = ace.require('ace/range').Range // get reference to ace/range
+
 
 
 editor.selection.clearSelection();
@@ -2319,6 +2337,12 @@ editor.selection.clearSelection();
      //timeout here?
        minimapeditor.setValue(editor.getSession().getValue());
        minimapeditor.selection.clearSelection();
+
+
+  ace.edit("editor").focus(); //To focus the ace editor
+  ace.edit("editor").renderer.$cursorLayer.showCursor();
+
+
    });
 
 
@@ -2358,8 +2382,6 @@ minimapeditor.on('mouseup', () => {       // var cursor = minimapeditor.getCurso
     ace.edit("editor").moveCursorTo(cursorrow,cursorcolumn);
     console.log("getcursor row",cursorrow );
      minimapeditor.selection.clearSelection();
-  ace.edit("editor").focus(); //To focus the ace editor
-  ace.edit("editor").renderer.$cursorLayer.showCursor();
 
   //const collection = document.getElementsByClassName("ace_gutter-cell ");
   //console.log("collection[0] ",collection[0]);
@@ -2367,6 +2389,17 @@ minimapeditor.on('mouseup', () => {       // var cursor = minimapeditor.getCurso
 });
 
 
+///////////////////////////////////////////////////////////////////////////
+// arduino alike map function == Re-maps a number from one range to another. 
+// https://www.arduino.cc/reference/en/language/functions/math/map/ 
+// https://stackoverflow.com/questions/5649803/remap-or-map-function-in-javascript
+// scale range 1 into range2 bar range to 0 to 1440 minute range  
+// or 
+// scale a minutevalue in range 0 to 1440 minutes to 0% to 100%,  used for left and width of timeslot divs
+///////////////////////////////////////////////////////////////////////////////
+function map_range(value, low1, high1, low2, high2) {
+    return (low2 + (high2 - low2) * (value - low1) / (high1 - low1)).toFixed(3);   // to 3 decimals, Math.round did not scale right
+}
 
 
 
@@ -2446,10 +2479,11 @@ function download(filename, text) {
   
 });
 
-
+var marker;
 // main editor info on scroll
 // set minimap linenuber from editor onscroll
 editor.session.on("changeScrollTop", function() {
+   minimapeditor.selection.clearSelection();
     const collection = document.getElementsByClassName("ace_gutter-cell ");
     console.log("collection[0] ",collection[0].innerHTML);
 
@@ -2463,11 +2497,23 @@ editor.session.on("changeScrollTop", function() {
     ace.edit("minimapeditor").moveCursorTo(currentlinenr);
     ace.edit("minimapeditor").gotoLine(currentlinenr);
 
-    minimapeditor.selection.selectLine();
-    minimapeditor.selection.selectLine(currentlinenr+1);
-    minimapeditor.selection.selectLine(currentlinenr+2);
+    //minimapeditor.selection.selectLine();
+    //minimapeditor.selection.selectLine(currentlinenr+1);
+    //minimapeditor.selection.selectLine(currentlinenr+2);
     
     editor.setAutoScrollEditorIntoView(true)
+
+	console.log("getFirstVisibleRow",editor.renderer.getFirstVisibleRow());
+					console.log("getLastVisibleRow",editor.renderer.getLastVisibleRow());
+					let nr_lines_vissible = editor.renderer.getLastVisibleRow() - editor.renderer.getFirstVisibleRow(); 
+document.getElementsByClassName("ace_map").innerHTML = "<div id='ace_map' style='top:" +  (map_range(editor.renderer.getFirstVisibleRow() ,0,editor.session.getLength()+nr_lines_vissible, 0,100)) + "%'></div>";
+
+ minimapeditor.session.removeMarker(marker);
+  //  setTimeout(function() {
+   marker=minimapeditor.session.addMarker(new Range(editor.renderer.getFirstVisibleRow(), 0, editor.renderer.getLastVisibleRow(), 0), "ace_active-line", "fullLine");
+     //editor.addMarker(new Range(1, 5, 9, 5), "foo", "line");
+  //  }, 100);
+
 })
 
 </script> 
