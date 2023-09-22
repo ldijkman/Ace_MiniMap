@@ -9,7 +9,7 @@ https://plnkr.co/plunk/ZEkhoGgs4ntDZzT0
 
 ace editor test for minimap alike view
    minimap is mini file overview scrollbar?
-use an extra ace window for minimap view in ace editor 
+use an extra ace editor window with small font size for minimap view in ace editor 
 like in chrome keypress crx exension
   but keyress minimap is not colored
   https://chrome.google.com/webstore/detail/keypress-editor/ghfooiajeobmcfhmajcblmompfdehnli
@@ -34,7 +34,9 @@ getconteent setcontent onchange?
 https://codepen.io/8354801/pen/OeOBXm
 https://codepen.io/luberth-dijkman/pen/bGMEwyQ
 
-This Editor Was Created By Michael Mccright. If This Document Is Copied, This Document Will Be Removed.-->
+This Editor Was Created By Michael Mccright. If This Document Is Copied, 
+This Document Will Be Removed.-->
+
 <!--Try Full Page View.-->
 <html lang="en">
 <head>
@@ -44,21 +46,21 @@ This Editor Was Created By Michael Mccright. If This Document Is Copied, This Do
     background-color:darkgrey;
   }
   #editor {
-  position:absolute;
-  top:35px;
-  width: 600vh;
-  height: 100%;
+    position:absolute;
+    top:5%;
+    width: 100%;
+    height: 95%;
  }
   #minimapeditor {
     position:absolute;
-right:15px;
-top:35px;
-  width: 100px;
-  height: 100%;
-  background-color:;
-  border: solid;
-  //border:1px;
- border-color:darkgrey;
+    right:15px;
+    top:5%;
+    width: 100px;
+    height: 95%;
+    background-color:; 
+    border:1px;
+    border: solid;
+    border-color:darkgrey;
  }
 ::-webkit-scrollbar {
     display: none;
@@ -70,6 +72,8 @@ top:35px;
 <body>
 <button onclick="showhideminimap()">Show / Hde MiniMap</button>
 
+
+<!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id="editor">
 <textarea>
 <!--
@@ -2195,8 +2199,13 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
                                 
 
 </textarea>
+
 </div>
+<!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 <div id="minimapeditor"></div>
+
+
+
 
   
  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ace.js"></script>
