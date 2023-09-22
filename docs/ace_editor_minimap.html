@@ -1,0 +1,1029 @@
+<!--
+
+  CopyRight Electra Electric Storm 2022
+
+test for my Ace editor Electric Storm CloudWriter
+https://plnkr.co/plunk/ZEkhoGgs4ntDZzT0
+   
+
+
+ace editor test for minimap alike view
+   minimap is mini file overview scrollbar?
+use an extra ace window for minimap view in ace editor 
+like in chrome keypress crx exension
+  but keyress minimap is not colored
+  https://chrome.google.com/webstore/detail/keypress-editor/ghfooiajeobmcfhmajcblmompfdehnli
+
+view keypress crx source contents
+https://robwu.nl/crxviewer/?crx=https://chrome.google.com/webstore/detail/keypress-editor/ghfooiajeobmcfhmajcblmompfdehnli
+
+
+maybe make an button  create big asci text art for headers wich you can seen in minimap  
+
+a click on ace minimap getcursor?
+should setcursor on ace editor?
+
+if ace editor is scrolled
+ace minimap should scroll with it
+
+if content is changed in ace editor 
+ace minimap should also change content
+getconteent setcontent onchange?
+
+
+https://codepen.io/8354801/pen/OeOBXm
+https://codepen.io/luberth-dijkman/pen/bGMEwyQ
+
+This Editor Was Created By Michael Mccright. If This Document Is Copied, This Document Will Be Removed.-->
+<!--Try Full Page View.-->
+<html lang="en">
+<head>
+<title>Ace Editor MiniMap Electric Storm CloudWriter</title>
+<style>
+  body{
+    background-color:darkgrey;
+  }
+  #editor {
+  position:absolute;
+  top:35px;
+  width: 600vh;
+  height: 100%;
+ }
+  #minimapeditor {
+    position:absolute;
+right:15px;
+top:35px;
+  width: 100px;
+  height: 100%;
+  background-color:;
+  border: solid;
+  //border:1px;
+ border-color:darkgrey;
+ }
+::-webkit-scrollbar {
+    display: none;
+}
+</style>
+  
+
+</head>
+<body>
+<button onclick="showhideminimap()">Show / Hde MiniMap</button>
+
+<div id="editor"></div>
+<div id="minimapeditor"></div>
+
+  
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ace.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ext-keybinding_menu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ext-prompt.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ext-language_tools.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/mode-html.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/mode-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/mode-css.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/mode-c_cpp.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/snippets/html.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/snippets/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/snippets/css.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/worker-html.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/worker-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/worker-css.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ext-searchbox.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/worker-base.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ext-beautify.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ext-settings_menu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ext-keybinding_menu.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ext-spellcheck.min.js"></script>
+  
+    <script>
+      var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/html");
+    editor.setValue(`
+<!--
+
+for the  [save by download ] button to work
+the document must contain
+</body> 
+;-)
+
+pi@raspberrypi:~ $ sudo apt-get install figlet
+<pre><code>
+pi@raspberrypi:~ $ figlet ELECTRA
+
+ _____ _     _____ ____ _____ ____      _    
+| ____| |   | ____/ ___|_   _|  _ \    / \   
+|  _| | |   |  _|| |     | | | |_) |  / _ \  
+| |___| |___| |__| |___  | | |  _ <  / ___ \ 
+|_____|_____|_____\____| |_| |_| \_\/_/   \_\
+                                             
+pi@raspberrypi:~
+    hmmm the foreslah gve problem in html
+    view page source shows it correct
+</code></pre>
+
+https://www.youtube.com/watch?v=3mbvWn1EY6g
+
+CopyRight Electra Electric Storm 2022
+
+minimap test for my Ace editor Electric Storm CloudWriter
+https://plnkr.co/plunk/ZEkhoGgs4ntDZzT0
+
+███████ ██████  ███████ ███████     ███████ ██      ███████  ██████ ████████ ██████   █████      ██████  ██ 
+██      ██   ██ ██      ██          ██      ██      ██      ██         ██    ██   ██ ██   ██          ██ ██ 
+█████   ██████  █████   █████       █████   ██      █████   ██         ██    ██████  ███████       ▄███  ██ 
+██      ██   ██ ██      ██          ██      ██      ██      ██         ██    ██   ██ ██   ██       ▀▀       
+██      ██   ██ ███████ ███████     ███████ ███████ ███████  ██████    ██    ██   ██ ██   ██       ██    ██ 
+                                                                                                            
+Please Ask
+developer@githubsupport.com
+to Free Electra ?!
+https://ldijkman.github.io/Electra
+She is There , Held Hostage by GitHub, Hidden 404 U
+
+minimap test for my Ace editor Electric Storm CloudWriter
+https://plnkr.co/plunk/ZEkhoGgs4ntDZzT0  
+
+
+minimap test for my Ace editor Electric Storm CloudWriter
+https://plnkr.co/plunk/ZEkhoGgs4ntDZzT0  
+
+
+ace editor test for minimap alike view
+
+Blah Blah Blah 
+       https://www.youtube.com/watch?v=mfJhMfOPWdE
+
+******************************************************************************
+i Luberth used a bit from https://codepen.io/8354801/pen/OeOBXm to get started
+    This Editor Was Created By Michael Mccright. 
+    If This Document Is Copied, 
+    This Document Will Be Removed.
+    ElectriFied Online.
+i Luberth used a bit from https://codepen.io/8354801/pen/OeOBXm to get started
+******************************************************************************
+-->
+<!--Try Full Page View.-->
+<html lang="en">
+<!--
+In Your Head or Body 
+         
+         https://www.youtube.com/watch?v=G01MStHbl9E
+
+██   ██ ███████  █████  ██████  
+██   ██ ██      ██   ██ ██   ██ 
+███████ █████   ███████ ██   ██ 
+██   ██ ██      ██   ██ ██   ██ 
+██   ██ ███████ ██   ██ ██████  
+
+         https://www.youtube.com/watch?v=G01MStHbl9E
+
+https://patorjk.com/software/taag/#p=display&f=ANSI%20Regular&t=script
+-->                                
+<head>
+<title>Ace Editor MiniMap Electric Storm CloudWriter</title>
+</head>
+<body>
+<a href="https://plnkr.co/plunk/ZEkhoGgs4ntDZzT0" target="Electra">[ <h1>CopyRight Electra Electric Storm 2022 ;-)</h1> ]</a>
+
+<pre>
+
+███████ ██████  ███████ ███████     ███████ ██      ███████  ██████ ████████ ██████   █████      ██████  ██ 
+██      ██   ██ ██      ██          ██      ██      ██      ██         ██    ██   ██ ██   ██          ██ ██ 
+█████   ██████  █████   █████       █████   ██      █████   ██         ██    ██████  ███████       ▄███  ██ 
+██      ██   ██ ██      ██          ██      ██      ██      ██         ██    ██   ██ ██   ██       ▀▀       
+██      ██   ██ ███████ ███████     ███████ ███████ ███████  ██████    ██    ██   ██ ██   ██       ██    ██ 
+                                                                                                            
+Please Ask
+developer@githubsupport.com
+to Free Electra ?!
+https://ldijkman.github.io/Electra
+She is There , Held Hostage by GitHub, Hidden 404 U
+
+minimap test for my Ace editor Electric Storm CloudWriter
+https://plnkr.co/plunk/ZEkhoGgs4ntDZzT0  
+
+ace editor test for minimap alike view
+minimap is mini file overview scrollbar?
+use an extra ace window for minimap view in ace editor 
+like in chrome keypress crx exension
+  but keyress minimap is not colored
+  https://chrome.google.com/webstore/detail/keypress-editor/ghfooiajeobmcfhmajcblmompfdehnli
+
+maybe make an button  create big asci text art for headers wich you can seen in minimap  
+
+a click on ace minimap getcursor?
+should setcursor on ace editor?
+
+if ace editor is scrolled
+ace minimap should scroll with it
+
+if content is changed in ace editor 
+ace minimap should also change content
+getconteent setcontent onchange?
+  </pre>
+
+<br>
+<h1>
+<a href="https://run.plnkr.co/plunks/dqcdy6hSIj8lU0jg/" target="Ace_Editor_MiniMap">Ace Editor MiniMap https://run.plnkr.co/plunks/dqcdy6hSIj8lU0jg/ </a>
+</h1>
+
+<iframe width="697" height="392" src="https://www.youtube.com/embed/eC0tJmIl_lY">
+</iframe>
+<br><br>
+<iframe width="697" height="392" src="https://www.youtube.com/embed/5uapPPC8eQY">
+</iframe>
+<br>
+<b>
+https://www.youtube.com/user/LuberthDijkman/videos<br>
+</b>
+<br> Blah Blah Blah <br>
+       https://www.youtube.com/watch?v=mfJhMfOPWdE<br>
+       <iframe width="697" height="392" src="https://www.youtube.com/embed/mfJhMfOPWdE">
+</iframe><br>
+
+<!--  
+
+
+
+███████  ██████ ██████  ██ ██████  ████████ 
+██      ██      ██   ██ ██ ██   ██    ██    
+███████ ██      ██████  ██ ██████     ██    
+     ██ ██      ██   ██ ██ ██         ██    
+███████  ██████ ██   ██ ██ ██         ██    
+https://patorjk.com/software/taag/#p=display&f=ANSI%20Regular&t=script
+-->                                    
+<script>
+//test
+\<\/script>
+
+<!--  
+███████  ██████ ██████  ██ ██████  ████████ 
+██      ██      ██   ██ ██ ██   ██    ██    
+███████ ██      ██████  ██ ██████     ██    
+     ██ ██      ██   ██ ██ ██         ██    
+███████  ██████ ██   ██ ██ ██         ██    
+https://patorjk.com/software/taag/#p=display&f=ANSI%20Regular&t=script
+-->                                    
+<script>
+//test
+\<\/script>
+
+<p style="color:purple;">Donec nunc ligula, vulputate quis mollis eu, interdum quis libero. Donec nulla ante, facilisis sit amet vulputate at, tincidunt a velit. Maecenas vestibulum, nulla sed tincidunt viverra, lorem turpis aliquam urna, ut pretium orci purus consequat augue. Etiam a enim orci, vitae pulvinar odio. In elit urna, tincidunt a pellentesque et, scelerisque at nibh. Sed nec est sapien. Aliquam ullamcorper eros eu quam ultrices vel faucibus eros interdum. Etiam mattis eleifend sapien, eu iaculis massa feugiat sed. Aliquam erat volutpat. Vivamus facilisis ultricies eros, a pretium purus mollis id. Sed dapibus elit ut neque rutrum dignissim. Nulla eros nisl, venenatis quis rhoncus sit amet, molestie nec nisl. Pellentesque vel neque sapien, et sagittis nulla.</p>
+
+  <p style="color:green;">Aliquam eu iaculis mauris. Etiam arcu lectus, imperdiet sit amet volutpat vitae, commodo sed nibh. Fusce faucibus tempor cursus. Donec ut ligula tortor. Maecenas malesuada, diam vitae pharetra dictum, erat ante iaculis risus, sed sollicitudin nisl nisl vel metus. Nulla libero augue, convallis nec luctus id, iaculis nec urna. Cras vitae mi ut augue ultricies tempus.</p>
+
+  <p>Vestibulum euismod vehicula sollicitudin. Duis nibh justo, rhoncus ac ullamcorper nec, rutrum sit amet leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum varius posuere nisi sed aliquet. Etiam dolor nisi, placerat vel congue tempus, posuere sed erat. Phasellus turpis eros, molestie sed consequat in, pretium at erat. In sed faucibus metus. Vestibulum fermentum libero nec eros fermentum dapibus. Duis nec libero eros. Pellentesque magna ligula, sagittis dictum fringilla at, posuere porttitor sem. Donec aliquam, ipsum quis pulvinar dapibus, augue sem viverra sapien, nec tempus odio nulla ac metus. Nunc ut augue mi, nec consequat urna.</p>
+
+<!--  
+███████  ██████ ██████  ██ ██████  ████████ 
+██      ██      ██   ██ ██ ██   ██    ██    
+███████ ██      ██████  ██ ██████     ██    
+     ██ ██      ██   ██ ██ ██         ██    
+███████  ██████ ██   ██ ██ ██         ██    
+https://patorjk.com/software/taag/#p=display&f=ANSI%20Regular&t=script
+-->                                    
+<script>
+//test
+\<\/script>
+
+
+<!--  
+███████  ██████ ██████  ██ ██████  ████████ 
+██      ██      ██   ██ ██ ██   ██    ██    
+███████ ██      ██████  ██ ██████     ██    
+     ██ ██      ██   ██ ██ ██         ██    
+███████  ██████ ██   ██ ██ ██         ██    
+https://patorjk.com/software/taag/#p=display&f=ANSI%20Regular&t=script
+-->                                    
+<script>
+//test
+\<\/script>
+
+<p style="color:purple;">Donec nunc ligula, vulputate quis mollis eu, interdum quis libero. Donec nulla ante, facilisis sit amet vulputate at, tincidunt a velit. Maecenas vestibulum, nulla sed tincidunt viverra, lorem turpis aliquam urna, ut pretium orci purus consequat augue. Etiam a enim orci, vitae pulvinar odio. In elit urna, tincidunt a pellentesque et, scelerisque at nibh. Sed nec est sapien. Aliquam ullamcorper eros eu quam ultrices vel faucibus eros interdum. Etiam mattis eleifend sapien, eu iaculis massa feugiat sed. Aliquam erat volutpat. Vivamus facilisis ultricies eros, a pretium purus mollis id. Sed dapibus elit ut neque rutrum dignissim. Nulla eros nisl, venenatis quis rhoncus sit amet, molestie nec nisl. Pellentesque vel neque sapien, et sagittis nulla.</p>
+
+  <p style="color:green;">Aliquam eu iaculis mauris. Etiam arcu lectus, imperdiet sit amet volutpat vitae, commodo sed nibh. Fusce faucibus tempor cursus. Donec ut ligula tortor. Maecenas malesuada, diam vitae pharetra dictum, erat ante iaculis risus, sed sollicitudin nisl nisl vel metus. Nulla libero augue, convallis nec luctus id, iaculis nec urna. Cras vitae mi ut augue ultricies tempus.</p>
+
+  <p>Vestibulum euismod vehicula sollicitudin. Duis nibh justo, rhoncus ac ullamcorper nec, rutrum sit amet leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum varius posuere nisi sed aliquet. Etiam dolor nisi, placerat vel congue tempus, posuere sed erat. Phasellus turpis eros, molestie sed consequat in, pretium at erat. In sed faucibus metus. Vestibulum fermentum libero nec eros fermentum dapibus. Duis nec libero eros. Pellentesque magna ligula, sagittis dictum fringilla at, posuere porttitor sem. Donec aliquam, ipsum quis pulvinar dapibus, augue sem viverra sapien, nec tempus odio nulla ac metus. Nunc ut augue mi, nec consequat urna.</p>
+
+<!--  
+███████  ██████ ██████  ██ ██████  ████████ 
+██      ██      ██   ██ ██ ██   ██    ██    
+███████ ██      ██████  ██ ██████     ██    
+     ██ ██      ██   ██ ██ ██         ██    
+███████  ██████ ██   ██ ██ ██         ██    
+https://patorjk.com/software/taag/#p=display&f=ANSI%20Regular&t=script
+-->                                    
+<script>
+//test
+\<\/script>
+
+
+<!--  
+███████  ██████ ██████  ██ ██████  ████████ 
+██      ██      ██   ██ ██ ██   ██    ██    
+███████ ██      ██████  ██ ██████     ██    
+     ██ ██      ██   ██ ██ ██         ██    
+███████  ██████ ██   ██ ██ ██         ██    
+https://patorjk.com/software/taag/#p=display&f=ANSI%20Regular&t=script
+-->                                    
+<script>
+//test
+\<\/script>
+<p style="color:purple;">Donec nunc ligula, vulputate quis mollis eu, interdum quis libero. Donec nulla ante, facilisis sit amet vulputate at, tincidunt a velit. Maecenas vestibulum, nulla sed tincidunt viverra, lorem turpis aliquam urna, ut pretium orci purus consequat augue. Etiam a enim orci, vitae pulvinar odio. In elit urna, tincidunt a pellentesque et, scelerisque at nibh. Sed nec est sapien. Aliquam ullamcorper eros eu quam ultrices vel faucibus eros interdum. Etiam mattis eleifend sapien, eu iaculis massa feugiat sed. Aliquam erat volutpat. Vivamus facilisis ultricies eros, a pretium purus mollis id. Sed dapibus elit ut neque rutrum dignissim. Nulla eros nisl, venenatis quis rhoncus sit amet, molestie nec nisl. Pellentesque vel neque sapien, et sagittis nulla.</p>
+
+  <p style="color:green;">Aliquam eu iaculis mauris. Etiam arcu lectus, imperdiet sit amet volutpat vitae, commodo sed nibh. Fusce faucibus tempor cursus. Donec ut ligula tortor. Maecenas malesuada, diam vitae pharetra dictum, erat ante iaculis risus, sed sollicitudin nisl nisl vel metus. Nulla libero augue, convallis nec luctus id, iaculis nec urna. Cras vitae mi ut augue ultricies tempus.</p>
+
+  <p>Vestibulum euismod vehicula sollicitudin. Duis nibh justo, rhoncus ac ullamcorper nec, rutrum sit amet leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum varius posuere nisi sed aliquet. Etiam dolor nisi, placerat vel congue tempus, posuere sed erat. Phasellus turpis eros, molestie sed consequat in, pretium at erat. In sed faucibus metus. Vestibulum fermentum libero nec eros fermentum dapibus. Duis nec libero eros. Pellentesque magna ligula, sagittis dictum fringilla at, posuere porttitor sem. Donec aliquam, ipsum quis pulvinar dapibus, augue sem viverra sapien, nec tempus odio nulla ac metus. Nunc ut augue mi, nec consequat urna.</p>
+
+
+<!--  
+███████  ██████ ██████  ██ ██████  ████████ 
+██      ██      ██   ██ ██ ██   ██    ██    
+███████ ██      ██████  ██ ██████     ██    
+     ██ ██      ██   ██ ██ ██         ██    
+███████  ██████ ██   ██ ██ ██         ██    
+https://patorjk.com/software/taag/#p=display&f=ANSI%20Regular&t=script
+-->                                    
+<script>
+//test
+\<\/script>
+
+
+        <p>This is a test page filled 
+          with common HTML elements 
+          to be used to provide visual 
+          feedback. whilst building CSS systems and frameworks.</p>
+      </header>
+      <nav role="navigation">
+        <ul>
+          <li>
+            <a href="#text">Text</a>
+            <ul>
+              <li><a href="#text__headings">Headings</a></li>
+              <li><a href="#text__paragraphs">Paragraphs</a></li>
+              <li><a href="#text__blockquotes">Blockquotes</a></li>
+              <li><a href="#text__lists">Lists</a></li>
+              <li><a href="#text__hr">Horizontal rules</a></li>
+              <li><a href="#text__tables">Tabular data</a></li>
+              <li><a href="#text__code">Code</a></li>
+              <li><a href="#text__inline">Inline elements</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#embedded">Embedded content</a>
+            <ul>
+              <li><a href="#embedded__images">Images</a></li>
+              <li><a href="#embedded__audio">Audio</a></li>
+              <li><a href="#embedded__video">Video</a></li>
+              <li><a href="#embedded__canvas">Canvas</a></li>
+              <li><a href="#embedded__meter">Meter</a></li>
+              <li><a href="#embedded__progress">Progress</a></li>
+              <li><a href="#embedded__svg">Inline SVG</a></li>
+              <li><a href="#embedded__iframe">IFrames</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#forms">Form elements</a>
+            <ul>
+              <li><a href="#forms__input">Input fields</a></li>
+              <li><a href="#forms__select">Select menus</a></li>
+              <li><a href="#forms__checkbox">Checkboxes</a></li>
+              <li><a href="#forms__radio">Radio buttons</a></li>
+              <li><a href="#forms__textareas">Textareas</a></li>
+              <li><a href="#forms__html5">HTML5 inputs</a></li>
+              <li><a href="#forms__action">Action buttons</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <main role="main">
+        <section id="text">
+          <header><h1>Text</h1></header>
+          <article id="text__headings">
+            <header>
+              <h1>Headings</h1>
+            </header>
+            <div>
+              <h1>Heading 1</h1>
+              <h2>Heading 2</h2>
+              <h3>Heading 3</h3>
+              <h4>Heading 4</h4>
+              <h5>Heading 5</h5>
+              <h6>Heading 6</h6>
+            </div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="text__paragraphs">
+            <header><h1>Paragraphs</h1></header>
+            <div>
+              <p>A paragraph (from the Greek paragraphos, “to write beside” or “written beside”) is a self-contained unit of a discourse in writing dealing with a particular point or idea. A paragraph consists of one or more sentences. Though not required by the syntax of any language, paragraphs are usually an expected part of formal writing, used to organize longer prose.</p>
+            </div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="text__blockquotes">
+            <header><h1>Blockquotes</h1></header>
+            <div>
+              <blockquote>
+                <p>A block quotation (also known as a long quotation or extract) is a quotation in a written document, that is set off from the main text as a paragraph, or block of text.</p>
+                <p>It is typically distinguished visually using indentation and a different typeface or smaller size quotation. It may or may not include a citation, usually placed at the bottom.</p>
+                <cite><a href="#!">Said no one, ever.</a></cite>
+              </blockquote>
+            </div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="text__lists">
+            <header><h1>Lists</h1></header>
+            <div>
+              <h3>Definition list</h3>
+              <dl>
+                <dt>Definition List Title</dt>
+                <dd>This is a definition list division.</dd>
+              </dl>
+              <h3>Ordered List</h3>
+              <ol>
+                <li>List Item 1</li>
+                <li>List Item 2</li>
+                <li>List Item 3</li>
+              </ol>
+              <h3>Unordered List</h3>
+              <ul>
+                <li>List Item 1</li>
+                <li>List Item 2</li>
+                <li>List Item 3</li>
+              </ul>
+            </div>&nbsp;&nbsp;<a href="https://plnkr.co/plunk/ZEkhoGgs4ntDZzT0" target="Electra">[ <small>CopyRight Electra Electric Storm 2022 ;-)</small> ]</a>
+
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="text__hr">
+            <header><h1>Horizontal rules</h1></header>
+            <div>
+              <hr>
+            </div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="text__tables">
+            <header><h1>Tabular data</h1></header>
+            <table>
+              <caption>Table Caption</caption>
+              <thead>
+                <tr>
+                  <th>Table Heading 1</th>
+                  <th>Table Heading 2</th>
+                  <th>Table Heading 3</th>
+                  <th>Table Heading 4</th>
+                  <th>Table Heading 5</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Table Footer 1</th>
+                  <th>Table Footer 2</th>
+                  <th>Table Footer 3</th>
+                  <th>Table Footer 4</th>
+                  <th>Table Footer 5</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <tr>
+                  <td>Table Cell 1</td>
+                  <td>Table Cell 2</td>
+                  <td>Table Cell 3</td>
+                  <td>Table Cell 4</td>
+                  <td>Table Cell 5</td>
+                </tr>
+                <tr>
+                  <td>Table Cell 1</td>
+                  <td>Table Cell 2</td>
+                  <td>Table Cell 3</td>
+                  <td>Table Cell 4</td>
+                  <td>Table Cell 5</td>
+                </tr>
+                <tr>
+                  <td>Table Cell 1</td>
+                  <td>Table Cell 2</td>
+                  <td>Table Cell 3</td>
+                  <td>Table Cell 4</td>
+                  <td>Table Cell 5</td>
+                </tr>
+                <tr>
+                  <td>Table Cell 1</td>
+                  <td>Table Cell 2</td>
+                  <td>Table Cell 3</td>
+                  <td>Table Cell 4</td>
+                  <td>Table Cell 5</td>
+                </tr>
+              </tbody>
+            </table>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="text__code">
+            <header><h1>Code</h1></header>
+            <div>
+              <p><strong>Keyboard input:</strong> <kbd>Cmd</kbd></p>
+              <p><strong>Inline code:</strong> <code>&lt;div&gt;code&lt;/div&gt;</code></p>
+              <p><strong>Sample output:</strong> <samp>This is sample output from a computer program.</samp></p>
+              <h2>Pre-formatted text</h2>
+              <pre>P R E F O R M A T T E D T E X T
+  ! " # $ % &amp; ' ( ) * + , - . /
+  0 1 2 3 4 5 6 7 8 9 : ; &lt; = &gt; ?
+  @ A B C D E F G H I J K L M N O
+  P Q R S T U V W X Y Z [ \ ] ^ _
+  \` a b c d e f g h i j k l m n o
+  p q r s t u v w x y z { | } ~ </pre>
+            </div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="text__inline">
+            <header><h1>Inline elements</h1></header>
+            <div>
+              <p><a href="#!">This is a text link</a>.</p>
+              <p><strong>Strong is used to indicate strong importance.</strong></p>
+              <p><em>This text has added emphasis.</em></p>
+              <p>The <b>b element</b> is stylistically different text from normal text, without any special importance.</p>
+              <p>The <i>i element</i> is text that is offset from the normal text.</p>
+              <p>The <u>u element</u> is text with an unarticulated, though explicitly rendered, non-textual annotation.</p>
+              <p><del>This text is deleted</del> and <ins>This text is inserted</ins>.</p>
+              <p><s>This text has a strikethrough</s>.</p>
+              <p>Superscript<sup>®</sup>.</p>
+              <p>Subscript for things like H<sub>2</sub>O.</p>
+              <p><small>This small text is small for for fine print, etc.</small></p>
+              <p>Abbreviation: <abbr title="HyperText Markup Language">HTML</abbr></p>
+              <p><q cite="https://developer.mozilla.org/en-US/docs/HTML/Element/q">This text is a short inline quotation.</q></p>
+              <p><cite>This is a citation.</cite></p>
+              <p>The <dfn>dfn element</dfn> indicates a definition.</p>
+              <p>The <mark>mark element</mark> indicates a highlight.</p>
+              <p>The <var>variable element</var>, such as <var>x</var> = <var>y</var>.</p>
+              <p>The time element: <time datetime="2013-04-06T12:32+00:00">2 weeks ago</time></p>
+            </div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+        </section>
+
+        <section id="embedded">
+          <header><h1>Embedded content</h1></header>
+          <article id="embedded__images">
+            <header><h2>Images</h2></header>
+            <div>
+              <h3>No <code>&lt;figure&gt;</code> element</h3>
+              <p><img src="http://placekitten.com/480/480" alt="Image alt text"></p>
+              <h3>Wrapped in a <code>&lt;figure&gt;</code> element, no <code>&lt;figcaption&gt;</code></h3>
+              <figure><img src="http://placekitten.com/420/420" alt="Image alt text"></figure>
+              <h3>Wrapped in a <code>&lt;figure&gt;</code> element, with a <code>&lt;figcaption&gt;</code></h3>
+              <figure>
+                <img src="http://placekitten.com/420/420" alt="Image alt text">
+                <figcaption>Here is a caption for this image.</figcaption>
+              </figure>
+            </div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="embedded__audio">
+            <header><h2>Audio</h2></header>
+            <div><audio controls="">audio</audio></div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="embedded__video">
+            <header><h2>Video</h2></header>
+            <div><video controls="">video</video></div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="embedded__canvas">
+            <header><h2>Canvas</h2></header>
+            <div><canvas>canvas</canvas></div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="embedded__meter">
+            <header><h2>Meter</h2></header>
+            <div><meter value="2" min="0" max="10">2 out of 10</meter></div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="embedded__progress">
+            <header><h2>Progress</h2></header>
+            <div><progress>progress</progress></div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="embedded__svg">
+            <header><h2>Inline SVG</h2></header>
+            <div><svg width="100px" height="100px"><circle cx="100" cy="100" r="100" fill="#1fa3ec"></circle></svg></div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+          <article id="embedded__iframe">
+            <header><h2>IFrame</h2></header>
+            <div><iframe src="test.html" height="300"></iframe></div>
+            <footer><p><a href="#top">[Top]</a></p></footer>
+          </article>
+        </section>
+        <section id="forms">
+          <header><h1>Form elements</h1></header>
+          <form>
+            <fieldset id="forms__input">
+              <legend>Input fields</legend>
+              <p>
+                <label for="input__text">Text Input</label>
+                <input id="input__text" type="text" placeholder="Text Input">
+              </p>
+              <p>
+                <label for="input__password">Password</label>
+                <input id="input__password" type="password" placeholder="Type your Password">
+              </p>
+              <p>
+                <label for="input__webaddress">Web Address</label>
+                <input id="input__webaddress" type="url" placeholder="http://yoursite.com">
+              </p>
+              <p>
+                <label for="input__emailaddress">Email Address</label>
+                <input id="input__emailaddress" type="email" placeholder="name@email.com">
+              </p>
+              <p>
+                <label for="input__phone">Phone Number</label>
+                <input id="input__phone" type="tel" placeholder="(999) 999-9999">
+              </p>
+              <p>
+                <label for="input__search">Search</label>
+                <input id="input__search" type="search" placeholder="Enter Search Term">
+              </p>
+              <p>
+                <label for="input__text2">Number Input</label>
+                <input id="input__text2" type="number" placeholder="Enter a Number">
+              </p>
+              <p>
+                <label for="input__text3" class="error">Error</label>
+                <input id="input__text3" class="is-error" type="text" placeholder="Text Input">
+              </p>
+              <p>
+                <label for="input__text4" class="valid">Valid</label>
+                <input id="input__text4" class="is-valid" type="text" placeholder="Text Input">
+              </p>
+            </fieldset>
+            <p><a href="#top">[Top]</a></p>
+            <fieldset id="forms__select">
+              <legend>Select menus</legend>
+              <p>
+                <label for="select">Select</label>
+                <select id="select">
+                  <optgroup label="Option Group">
+                    <option>Option One</option>
+                    <option>Option Two</option>
+                    <option>Option Three</option>
+                  </optgroup>
+                </select>
+              </p>
+            </fieldset>
+            <p><a href="#top">[Top]</a></p>
+            <fieldset id="forms__checkbox">
+              <legend>Checkboxes</legend>
+              <ul class="list list--bare">
+                <li><label for="checkbox1"><input id="checkbox1" name="checkbox" type="checkbox" checked="checked"> Choice A</label></li>
+                <li><label for="checkbox2"><input id="checkbox2" name="checkbox" type="checkbox"> Choice B</label></li>
+                <li><label for="checkbox3"><input id="checkbox3" name="checkbox" type="checkbox"> Choice C</label></li>
+              </ul>
+            </fieldset>
+            <p><a href="#top">[Top]</a></p>
+            <fieldset id="forms__radio">
+              <legend>Radio buttons</legend>
+              <ul class="list list--bare">
+                <li><label for="radio1"><input id="radio1" name="radio" type="radio" class="radio" checked="checked"> Option 1</label></li>
+                <li><label for="radio2"><input id="radio2" name="radio" type="radio" class="radio"> Option 2</label></li>
+                <li><label for="radio3"><input id="radio3" name="radio" type="radio" class="radio"> Option 3</label></li>
+              </ul>
+            </fieldset>
+            <p><a href="#top">[Top]</a></p>
+            <fieldset id="forms__textareas">
+              <legend>Textareas</legend>
+              <p>
+                <label for="textarea">Textarea</label>
+                <textarea id="textarea" rows="8" cols="48" placeholder="Enter your message here"></textarea>
+              </p>
+            </fieldset>
+            <p><a href="#top">[Top]</a></p>
+            <fieldset id="forms__html5">
+              <legend>HTML5 inputs</legend>
+              <p>
+                <label for="ic">Color input</label>
+                <input type="color" id="ic" value="#000000">
+              </p>
+              <p>
+                <label for="in">Number input</label>
+                <input type="number" id="in" min="0" max="10" value="5">
+              </p>
+              <p>
+                <label for="ir">Range input</label>
+                <input type="range" id="ir" value="10">
+              </p>
+              <p>
+                <label for="idd">Date input</label>
+                <input type="date" id="idd" value="1970-01-01">
+              </p>
+              <p>
+                <label for="idm">Month input</label>
+                <input type="month" id="idm" value="1970-01">
+              </p>
+              <p>
+                <label for="idw">Week input</label>
+                <input type="week" id="idw" value="1970-W01">
+              </p>
+              <p>
+                <label for="idt">Datetime input</label>
+                <input type="datetime" id="idt" value="1970-01-01T00:00:00Z">
+              </p>
+              <p>
+                <label for="idtl">Datetime-local input</label>
+                <input type="datetime-local" id="idtl" value="1970-01-01T00:00">
+              </p>
+            </fieldset>
+            <p><a href="#top">[Top]</a></p>
+            <fieldset id="forms__action">
+              <legend>Action buttons</legend>
+              <p>
+                <input type="submit" value="<input type=submit>">
+                <input type="button" value="<input type=button>">
+                <input type="reset" value="<input type=reset>">
+                <input type="submit" value="<input disabled>" disabled>
+              </p>
+              <p>
+                <button type="submit">&lt;button type=submit&gt;</button>
+                <button type="button">&lt;button type=button&gt;</button>
+                <button type="reset">&lt;button type=reset&gt;</button>
+                <button type="button" disabled>&lt;button disabled&gt;</button>
+              </p>
+            </fieldset>
+            <p><a href="#top">[Top]</a></p>
+          </form>
+        </section>
+      </main>
+      <footer role="contentinfo">
+        <p>Made by <a href="http://twitter.com/cbracco">@cbracco</a>. Code on <a href="http://github.com/cbracco/html5-test-page">GitHub</a>.</p>
+      </footer>
+    </div>
+    
+ 
+<!--  
+███████  ██████ ██████  ██ ██████  ████████ 
+██      ██      ██   ██ ██ ██   ██    ██    
+███████ ██      ██████  ██ ██████     ██    
+     ██ ██      ██   ██ ██ ██         ██    
+███████  ██████ ██   ██ ██ ██         ██    
+https://patorjk.com/software/taag/#p=display&f=ANSI%20Regular&t=script
+-->                                    
+<script>
+//test
+\<\/script>
+<p style="color:purple;">Donec nunc ligula, vulputate quis mollis eu, interdum quis libero. Donec nulla ante, facilisis sit amet vulputate at, tincidunt a velit. Maecenas vestibulum, nulla sed tincidunt viverra, lorem turpis aliquam urna, ut pretium orci purus consequat augue. Etiam a enim orci, vitae pulvinar odio. In elit urna, tincidunt a pellentesque et, scelerisque at nibh. Sed nec est sapien. Aliquam ullamcorper eros eu quam ultrices vel faucibus eros interdum. Etiam mattis eleifend sapien, eu iaculis massa feugiat sed. Aliquam erat volutpat. Vivamus facilisis ultricies eros, a pretium purus mollis id. Sed dapibus elit ut neque rutrum dignissim. Nulla eros nisl, venenatis quis rhoncus sit amet, molestie nec nisl. Pellentesque vel neque sapien, et sagittis nulla.</p>
+
+  <p style="color:green;">Aliquam eu iaculis mauris. Etiam arcu lectus, imperdiet sit amet volutpat vitae, commodo sed nibh. Fusce faucibus tempor cursus. Donec ut ligula tortor. Maecenas malesuada, diam vitae pharetra dictum, erat ante iaculis risus, sed sollicitudin nisl nisl vel metus. Nulla libero augue, convallis nec luctus id, iaculis nec urna. Cras vitae mi ut augue ultricies tempus.</p>
+
+  <p>Vestibulum euismod vehicula sollicitudin. Duis nibh justo, rhoncus ac ullamcorper nec, rutrum sit amet leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum varius posuere nisi sed aliquet. Etiam dolor nisi, placerat vel congue tempus, posuere sed erat. Phasellus turpis eros, molestie sed consequat in, pretium at erat. In sed faucibus metus. Vestibulum fermentum libero nec eros fermentum dapibus. Duis nec libero eros. Pellentesque magna ligula, sagittis dictum fringilla at, posuere porttitor sem. Donec aliquam, ipsum quis pulvinar dapibus, augue sem viverra sapien, nec tempus odio nulla ac metus. Nunc ut augue mi, nec consequat urna.</p>
+
+<!--
+
+ ██████  ██████  ███    ███ ███    ███ ███████ ███    ██ ████████ 
+██      ██    ██ ████  ████ ████  ████ ██      ████   ██    ██    
+██      ██    ██ ██ ████ ██ ██ ████ ██ █████   ██ ██  ██    ██    
+██      ██    ██ ██  ██  ██ ██  ██  ██ ██      ██  ██ ██    ██    
+ ██████  ██████  ██      ██ ██      ██ ███████ ██   ████    ██    
+                                                                  
+                                                                  
+
+ace editor test for minimap alike view
+   minimap is mini file overview scrollbar?
+use an extra ace window for minimap view in ace editor 
+like in chrome keypress crx exension
+  but keyress minimap is not colored
+  https://chrome.google.com/webstore/detail/keypress-editor/ghfooiajeobmcfhmajcblmompfdehnli
+
+maybe make an button  create big asci text art for headers wich you can seen in minimap  
+
+a click on ace minimap getcursor?
+should setcursor on ace editor?
+
+if ace editor is scrolled
+ace minimap should scroll with it
+
+if content is changed in ace editor 
+ace minimap should also change content
+getconteent setcontent onchange?
+
+
+https://codepen.io/8354801/pen/OeOBXm
+https://codepen.io/luberth-dijkman/pen/bGMEwyQ
+
+This Editor Was Created By Michael Mccright. If This Document Is Copied, This Document Will Be Removed.-->
+
+<pre>
+ace editor test for minimap alike view
+minimap is mini file overview scrollbar?
+use an extra ace window for minimap view in ace editor 
+like in chrome keypress crx exension
+  but keyress minimap is not colored
+  https://chrome.google.com/webstore/detail/keypress-editor/ghfooiajeobmcfhmajcblmompfdehnli
+
+maybe make an button  create big asci text art for headers wich you can seen in minimap  
+
+a click on ace minimap getcursor?
+should setcursor on ace editor?
+
+if ace editor is scrolled
+ace minimap should scroll with it
+
+if content is changed in ace editor 
+ace minimap should also change content
+getconteent setcontent onchange?
+  </pre>
+
+<!--
+
+                https://www.youtube.com/watch?v=1npSAWHxgNY
+
+    ██ ██████   ██████  ██████  ██    ██ 
+   ██  ██   ██ ██    ██ ██   ██  ██  ██  
+  ██   ██████  ██    ██ ██   ██   ████   
+ ██    ██   ██ ██    ██ ██   ██    ██    
+██     ██████   ██████  ██████     ██    
+                                         
+
+                https://www.youtube.com/watch?v=1npSAWHxgNY
+-->
+<br>
+ElectraFied 2022<br>
+CopyRight Electra Electric Storm 2022
+<a href="https://plnkr.co/plunk/ZEkhoGgs4ntDZzT0" target="Electra">[ <h1>CopyRight Electra Electric Storm 2022 ;-)</h1> ]</a>
+<br>
+<h1>
+<a href="https://run.plnkr.co/plunks/dqcdy6hSIj8lU0jg/" target="Ace_Editor_MiniMap">Ace Editor MiniMap https://run.plnkr.co/plunks/dqcdy6hSIj8lU0jg/ </a>
+</h1>
+</body>
+</html>
+
+`);
+
+
+editor.selection.clearSelection();
+
+// change content minimap editor on change big editor
+   editor.getSession().on('change', function () {
+       minimapeditor.setValue(editor.getSession().getValue());
+   });
+
+
+  var minimapeditor = ace.edit("minimapeditor");
+  minimapeditor.setTheme("ace/theme/monokai");
+  minimapeditor.setFontSize(2.6);
+  minimapeditor.setShowPrintMargin(false);
+  minimapeditor.renderer.setShowGutter(false);
+  minimapeditor.setReadOnly(true);
+  minimapeditor.renderer.setOption('showLineNumbers', false);  
+  editor.setOption("showPrintMargin", false); 
+  minimapeditor.session.setMode("ace/mode/html");
+  minimapeditor.setValue(editor.getSession().getValue());
+  minimapeditor.selection.clearSelection();
+   
+// get linenumeber on minimap mouseclick
+   minimapeditor.on('mousedown', () => {
+         
+       // var cursor = minimapeditor.getCursorPosition();
+    var cursorrow = minimapeditor.getCursorPosition().row;
+     var cursorcolumn = minimapeditor.getCursorPosition().column;
+    //var cursorPos = $scope.editor.getCursorPosition()
+    
+    // move cursorr big editor to cursor pos minimapeditor
+    ace.edit("editor").gotoLine(cursorrow,cursorcolumn);
+    ace.edit("editor").moveCursorTo(cursorrow,cursorcolumn);
+    console.log("getcursor row",cursorrow );
+
+ 
+
+  
+});
+
+minimapeditor.on('mouseup', () => {
+  ace.edit("editor").focus(); //To focus the ace editor
+  ace.edit("editor").renderer.$cursorLayer.showCursor();
+
+  //const collection = document.getElementsByClassName("ace_gutter-cell ");
+  //console.log("collection[0] ",collection[0]);
+});
+
+
+
+
+
+// https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp
+function showhideminimap() {
+  var x = document.getElementById("minimapeditor");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+
+function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+}
+
+// save part of https://codepen.io/8354801/pen/OeOBXm
+function save() {
+  var range = editor.find('</body>',{
+    wrap: true,
+    caseSensitive: true, 
+    wholeWord: true,
+    regExp: false,
+    preventScroll: true // do not change selection
+})
+range.start.column = 0
+range.end.column = Number.MAX_VALUE
+editor.session.replace(range, "<center>Made with Electra<br><a href=\"https://plnkr.co/plunk/dqcdy6hSIj8lU0jg\" target=\"Electric_Storm\">Electra Electric Storm CloudWriter</a><br><br></center>" + editor.session.getLine(range.start.row) + "")
+editor.selection.setRange(range)
+      download('Electric_Storm.html', editor.getValue());
+}
+
+// download part of https://codepen.io/8354801/pen/OeOBXm
+function download(filename, text) {
+      var element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+      element.setAttribute('download', filename);
+
+      element.style.display = 'none';
+      document.body.appendChild(element);
+
+      element.click();
+
+      document.body.removeChild(element);
+}
+
+
+
+
+ editor.on('mousedown', () => {
+         
+       // var cursor = minimapeditor.getCursorPosition();
+   // var cursorrow = minimapeditor.getCursorPosition().row;
+   //  var cursorcolumn = minimapeditor.getCursorPosition().column;
+    //var cursorPos = $scope.editor.getCursorPosition()
+    
+    // move cursorr big editor to cursor pos minimapeditor
+   // ace.edit("editor").gotoLine(cursorrow,cursorcolumn);
+   // ace.edit("editor").moveCursorTo(cursorrow,cursorcolumn);
+   // console.log("getcursor row",cursorrow );
+
+
+// onclick get first line of active editor window
+// maybe for set minimap window to that cursur location
+// but i get some span code now also
+      const collection = document.getElementsByClassName("ace_gutter-cell ");
+  console.log("collection[0] ",collection[0]);
+
+  
+});
+
+
+// main editor info on scroll
+// set minimap linenuber from editor onscroll
+editor.session.on("changeScrollTop", function() {
+    const collection = document.getElementsByClassName("ace_gutter-cell ");
+    console.log("collection[0] ",collection[0].innerHTML);
+
+    // strip html from innerhtml to get linenumber
+    // should be a better way to get toplinenumber from current view
+    var currentlinenr = (collection[0].innerHTML).replace(/(<([^>]+)>)/gi, "");
+    console.log("currentlinenr ",currentlinenr);
+
+
+    //minimapeditor.scrollToLine(currentlinenr, true, true, function () {});
+    ace.edit("minimapeditor").moveCursorTo(currentlinenr);
+    ace.edit("minimapeditor").gotoLine(currentlinenr);
+
+    minimapeditor.selection.selectLine();
+    minimapeditor.selection.selectLine(currentlinenr+1);
+    minimapeditor.selection.selectLine(currentlinenr+2);
+    
+    editor.setAutoScrollEditorIntoView(true)
+})
+
+</script> 
+
+&nbsp;&nbsp;<a href="https://run.plnkr.co/plunks/dqcdy6hSIj8lU0jg/" target="Full_Ace_Editor_MiniMap">[ FullScreen View ]</a>
+&nbsp;&nbsp;<a href="https://plnkr.co/plunk/ZEkhoGgs4ntDZzT0" target="Electra">[ <small>CopyRight Electra Electric Storm 2022 ;-)</small> ]</a>
+ &nbsp;<button onclick="toggleFullScreen()" title="Toggle FullScreen" style="background-color:lightblue;color:black;font-weight: bold;">FullScreen</button>
+   &nbsp;&nbsp;<button onclick='save()' style="background-color:lightgreen;color:black;font-weight: bold;">Save by DownLoad</button>
+</body>
+</html>
