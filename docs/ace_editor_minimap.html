@@ -2503,12 +2503,15 @@ var marker;
 // set minimap linenuber from editor onscroll
 editor.session.on("changeScrollTop", function() {
      minimapeditor.selection.clearSelection();
-     const collection = document.getElementsByClassName("ace_gutter-cell ");
-     console.log("collection[0] ",collection[0].innerHTML);
+     // const collection = document.getElementsByClassName("ace_gutter-cell ");
+     // console.log("collection[0] ",collection[0].innerHTML);
 
     // strip html from innerhtml to get linenumber
     // should be a better way to get toplinenumber from current view
-    var currentlinenr = (collection[0].innerHTML).replace(/(<([^>]+)>)/gi, "");
+    // var currentlinenr = (collection[0].innerHTML).replace(/(<([^>]+)>)/gi, "");
+
+    // get centerline of big editor
+    var currentlinenr = editor.renderer.getFirstVisibleRow()+((editor.renderer.getLastVisibleRow()-editor.renderer.getFirstVisibleRow())/2);
     console.log("currentlinenr ",currentlinenr);
 
 
