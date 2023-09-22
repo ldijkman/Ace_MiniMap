@@ -70,15 +70,16 @@ This Document Will Be Removed.-->
 <title>Ace Editor MiniMap Electric Storm CloudWriter</title>
 
 
-<style>
+<style> 
+
   body{
     background-color:darkgrey;
-    overscroll-behavior: none;
+   
   }
   #editor {
     position:absolute;
     top:5%;
-    width: 100%;
+    width: 99%;
     height: 94%;
  }
   #minimapeditor {
@@ -101,6 +102,7 @@ This Document Will Be Removed.-->
 #minimapeditor .ace_scrollbar-h {
     display: none;
 }
+overscroll-behavior: none;
 </style>
   
 
@@ -2296,9 +2298,10 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
   
     <script>
       var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
+    editor.setTheme("ace/theme/vibrant_ink");
     editor.session.setMode("ace/mode/html");
     //editor.setValue(` source nothing  `);
+    editor.setFontSize(18);
 
 
 editor.selection.clearSelection();
@@ -2310,7 +2313,7 @@ editor.selection.clearSelection();
 
 
   var minimapeditor = ace.edit("minimapeditor");
-  minimapeditor.setTheme("ace/theme/monokai");
+  minimapeditor.setTheme("ace/theme/vibrant_ink");
   minimapeditor.setFontSize(2.6);
   minimapeditor.setShowPrintMargin(false);
   minimapeditor.renderer.setShowGutter(false);
