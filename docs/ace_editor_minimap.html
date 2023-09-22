@@ -115,6 +115,13 @@ overscroll-behavior: none;
 <div id="editor" onmouseover="ace.edit("editor").focus();">
 <textarea>
 <!--
+
+https://ldijkman.github.io/Ace_MiniMap/ace_editor_minimap.html
+
+https://github.com/ldijkman/Ace_MiniMap
+
+https://github.com/ldijkman/Ace_MiniMap/discussions
+
 focus must be on editor
 
    control+, (ctrl+comma) for options
@@ -2308,7 +2315,10 @@ editor.selection.clearSelection();
 
 // change content minimap editor on change big editor
    editor.getSession().on('change', function () {
+
+     //timeout here?
        minimapeditor.setValue(editor.getSession().getValue());
+       minimapeditor.selection.clearSelection();
    });
 
 
