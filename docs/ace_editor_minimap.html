@@ -2515,16 +2515,17 @@ editor.session.on("changeScrollTop", function() {
     console.log("currentlinenr ",currentlinenr);
 
 
-    // minimapeditor.scrollToLine(currentlinenr, true, true, function () {});
+    minimapeditor.scrollToLine(currentlinenr, true, true, function () {});
     ace.edit("minimapeditor").moveCursorTo(currentlinenr);
     ace.edit("minimapeditor").gotoLine(currentlinenr);
+    minimapeditor.setAutoScrollEditorIntoView(true)
 
     // minimapeditor.selection.selectLine();
     // minimapeditor.selection.selectLine(currentlinenr+1);
     // minimapeditor.selection.selectLine(currentlinenr+2);
     
     editor.setAutoScrollEditorIntoView(true)
-    minimapeditor.setAutoScrollEditorIntoView(true)
+    
 
 	    // console.log("getFirstVisibleRow",editor.renderer.getFirstVisibleRow());
 			// console.log("getLastVisibleRow",editor.renderer.getLastVisibleRow());
