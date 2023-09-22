@@ -2326,30 +2326,40 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
     //editor.setValue(` source nothing  `);
     editor.setFontSize(18);
  var Range = ace.require('ace/range').Range // get reference to ace/range
+ace.require("ace/ext/language_tools");
+  ace.require('ace/ext/ext-linking'); // not sure if this is correct ace/ext/linking
 
+	editor.setOptions({
+		// -- ext-language_tools --
+	  enableBasicAutocompletion: true,
+		enableLiveAutocompletion: true,
+		enableSnippets: true, // for pre-defined auto-completion snippets
+		// --
+		enableLinking: true,
+		// --
+		enableFreeSpacePreviews: true,
+	});
 
 
 editor.selection.clearSelection();
 var myTimeout;
-// change content minimap editor on change big editor
-   editor.getSession().on('change', function () {
-
-     //timeout here?
-     
- clearTimeout(myTimeout);
-myTimeout = setTimeout(function(){
-     minimapeditor.setValue(editor.getSession().getValue());
-     minimapeditor.selection.clearSelection();
-}, 5000);
-
-     
 
 
-  ace.edit("editor").focus(); //To focus the ace editor
-  ace.edit("editor").renderer.$cursorLayer.showCursor();
+// on change big editor change content minimap editor 5 sec delay of no change
+editor.getSession().on('change', function () {
 
+    // timeout here?
+    // update minimap after 5 seconds no change (update every keypres makes editor slow) 
+    clearTimeout(myTimeout);
+    myTimeout = setTimeout(function(){
+        minimapeditor.setValue(editor.getSession().getValue());
+        minimapeditor.selection.clearSelection();
+    }, 5000);
 
-   });
+    ace.edit("editor").focus(); //To focus the ace editor
+    ace.edit("editor").renderer.$cursorLayer.showCursor();
+
+});
 
 
   var minimapeditor = ace.edit("minimapeditor");
