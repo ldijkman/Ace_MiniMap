@@ -2420,7 +2420,7 @@ minimapeditor.on('mouseup', () => {       // var cursor = minimapeditor.getCurso
     ace.edit("minimapeditor").moveCursorTo(editor.getCursorPosition());
     ace.edit("minimapeditor").gotoLine(cursorrow,cursorcolumn);
     minimapeditor.setAutoScrollEditorIntoView(true)
-    
+
      minimapeditor.session.removeMarker(marker);
  //marker=minimapeditor.session.addMarker(new Range(editor.renderer.getFirstVisibleRow(), 0, editor.renderer.getLastVisibleRow(), 0), "ace_active-line", "fullLine");
 
@@ -2567,9 +2567,13 @@ editor.session.on("changeScrollTop", function() {
 
 </script> 
 
-&nbsp;&nbsp;<a href="https://run.plnkr.co/plunks/dqcdy6hSIj8lU0jg/" target="Full_Ace_Editor_MiniMap">[ FullScreen View ]</a>
-&nbsp;&nbsp;<a href="https://plnkr.co/plunk/ZEkhoGgs4ntDZzT0" target="Electra">[ <small>CopyRight Electra Electric Storm 2022 ;-)</small> ]</a>
- &nbsp;<button onclick="toggleFullScreen()" title="Toggle FullScreen" style="background-color:lightblue;color:black;font-weight: bold;">FullScreen</button>
-   &nbsp;&nbsp;<button onclick='save()' style="background-color:lightgreen;color:black;font-weight: bold;">Save by DownLoad</button>
+&nbsp;&nbsp;
+<button onclick="toggleFullScreen()" title="Toggle FullScreen" style="background-color:lightblue;color:black;font-weight: bold;">FullScreen</button>
+&nbsp;&nbsp;
+<button onclick='save()' style="background-color:lightgreen;color:black;font-weight: bold;">Save by DownLoad</button>
+&nbsp;&nbsp;
+   <a href="https://github.com/ldijkman/Ace-Scrollbars/blob/master/docs/Ace_editor_custom_scrollbar.html" target="Ace custom scrollbar">[ Ace custom scrollbar ]</a>
+&nbsp;&nbsp;
+   <a href="https://plnkr.co/edit/Digj5Fw7D6hxaTU4?preview" target="Ace JumpScroll">[ Ace JumpScroll ]</a>
 </body>
 </html>
