@@ -112,7 +112,7 @@ overscroll-behavior: none;
 
 
 <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-<div id="editor">
+<div id="editor" onmouseover="ace.edit("editor").focus();">
 <textarea>
 <!--
 focus must be on editor
@@ -2258,7 +2258,7 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
 
 </div>
 <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-<div id="minimapeditor"></div>
+<div id="minimapeditor" onmouseover="ace.edit("minimapeditor").focus();"></div>
 
 
 
@@ -2324,10 +2324,21 @@ editor.selection.clearSelection();
   minimapeditor.setValue(editor.getSession().getValue());
   minimapeditor.selection.clearSelection();
    
+
+
+
+
 // get linenumeber on minimap mouseclick
    minimapeditor.on('mousedown', () => {
          
-       // var cursor = minimapeditor.getCursorPosition();
+
+
+ 
+
+  
+});
+
+minimapeditor.on('mouseup', () => {       // var cursor = minimapeditor.getCursorPosition();
     var cursorrow = minimapeditor.getCursorPosition().row;
      var cursorcolumn = minimapeditor.getCursorPosition().column;
     //var cursorPos = $scope.editor.getCursorPosition()
@@ -2336,18 +2347,13 @@ editor.selection.clearSelection();
     ace.edit("editor").gotoLine(cursorrow,cursorcolumn);
     ace.edit("editor").moveCursorTo(cursorrow,cursorcolumn);
     console.log("getcursor row",cursorrow );
-
- 
-
-  
-});
-
-minimapeditor.on('mouseup', () => {
+     minimapeditor.selection.clearSelection();
   ace.edit("editor").focus(); //To focus the ace editor
   ace.edit("editor").renderer.$cursorLayer.showCursor();
 
   //const collection = document.getElementsByClassName("ace_gutter-cell ");
   //console.log("collection[0] ",collection[0]);
+   minimapeditor.selection.clearSelection();
 });
 
 
