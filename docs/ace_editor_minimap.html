@@ -74,6 +74,7 @@ This Document Will Be Removed.-->
 body {
   color-scheme:  dark;
   background-color:black;
+  overscroll-behavior: none;
 }
 
   #editor {
@@ -114,10 +115,13 @@ width: 150px;
   opacity:50%;
 }
 
-overscroll-behavior: none;
 
-a {
-  color: lightgray;
+
+
+a:-webkit-any-link {
+    color: lightgray;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 </style>
