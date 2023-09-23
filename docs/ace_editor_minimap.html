@@ -65,7 +65,14 @@ This Document Will Be Removed.-->
 <!--Try Full Page View.-->
 <html lang="en">
 <head>
-  
+  <script>
+var warning = true;
+window.onbeforeunload = function() {  
+  if (warning) {  
+    return "You have made changes on this page that you have not yet confirmed. If you navigate away from this page you will lose your unsaved changes";  
+    }  
+}
+</script> 
 
   <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/ldijkman/randomnerd_esp32_wifi_manager/main/Electra.jpg">
 
@@ -2386,8 +2393,8 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ext-spellcheck.min.js"></script>
   
     
-      <script src="https://ldijkman.github.io/Ace-Editor-Click-Link-window.open-URL/hoverlink.js"></script>  
-  <!--  https://github.com/ldijkman/Ace-Editor-Click-Link-window.open-URL/tree/main/docs -->
+<script src="https://ldijkman.github.io/Ace-Editor-Click-Link-window.open-URL/hoverlink.js"></script>  
+<!--  https://github.com/ldijkman/Ace-Editor-Click-Link-window.open-URL/tree/main/docs -->
 
     
     
