@@ -73,9 +73,9 @@ This Document Will Be Removed.-->
 <style> 
 body {
   color-scheme:  dark;
-background-color:black;
-   
-  }
+  background-color:black;
+}
+
   #editor {
     position:absolute;
     top:5%;
@@ -115,12 +115,42 @@ width: 150px;
 }
 
 overscroll-behavior: none;
+
+a {
+  color: lightgray;
+}
+
 </style>
   
 
 </head>
 <body>
+
+
+
+<input type="button" onclick="document.getElementById('openbton').click()" value="Open File">
+<input
+        type="file"
+        id="openbton"
+        onchange="openCode(this.files)" 
+        value="Open PC"
+        style="background-color:lightgray;color:black;font-weight: bold;"
+        title="For PC load a file from Disk"
+        hidden
+      />
+&nbsp;&nbsp;
+<button onclick='save()' style="background-color:lightgreen;color:black;font-weight: bold;">Save by DownLoad</button>
+&nbsp;&nbsp;
 <button onclick="showhideminimap()">Show / Hde MiniMap</button>
+&nbsp;&nbsp;
+<button onclick="toggleFullScreen()" title="Toggle FullScreen" style="background-color:lightblue;color:black;font-weight: bold;">Toggle FullScreen</button>
+&nbsp;&nbsp;
+<a href="https://ldijkman.github.io/Ace-Scrollbars/Ace_editor_custom_scrollbar.html" target="Ace custom scrollbar">[ Ace custom scrollbar ]</a>
+&nbsp;&nbsp;
+<a href="https://plnkr.co/edit/Digj5Fw7D6hxaTU4?preview" target="Ace JumpScroll">[ Ace JumpScroll ]</a>
+
+
+
 
 
 <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
@@ -2390,7 +2420,7 @@ editor.getSession().on('change', function () {
   var minimapeditor = ace.edit("minimapeditor");
   minimapeditor.session.setMode("ace/mode/html"); 
   minimapeditor.setTheme("ace/theme/vibrant_ink");
-  minimapeditor.setFontSize(2.6);
+  minimapeditor.setFontSize(2.0);
   minimapeditor.setShowPrintMargin(false);
   minimapeditor.renderer.setShowGutter(false);
   minimapeditor.setReadOnly(true);
@@ -2567,7 +2597,23 @@ function download(filename, text) {
 }
 
 
+// https://plnkr.co/edit/GCLwKqNGqi4R2Fnr?preview
 
+  function openCode(files) {
+        var file = files[0];
+        if (!file) return;
+        var modelist = ace.require('ace/ext/modelist');
+        var modeName = modelist.getModeForPath(file.name).mode;
+        editor.session.setMode(modeName);
+
+        reader = new FileReader();
+        reader.onload = function () {
+          editor.session.setValue(reader.result);
+        };
+        reader.readAsText(file);   
+    
+        
+      }
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -2584,13 +2630,6 @@ function map_range(value, low1, high1, low2, high2) {
 
 </script> 
 
-&nbsp;&nbsp;
-<button onclick="toggleFullScreen()" title="Toggle FullScreen" style="background-color:lightblue;color:black;font-weight: bold;">FullScreen</button>
-&nbsp;&nbsp;
-<button onclick='save()' style="background-color:lightgreen;color:black;font-weight: bold;">Save by DownLoad</button>
-&nbsp;&nbsp;
-   <a href="https://ldijkman.github.io/Ace-Scrollbars/Ace_editor_custom_scrollbar.html" target="Ace custom scrollbar">[ Ace custom scrollbar ]</a>
-&nbsp;&nbsp;
-   <a href="https://plnkr.co/edit/Digj5Fw7D6hxaTU4?preview" target="Ace JumpScroll">[ Ace JumpScroll ]</a>
+
 </body>
 </html>
