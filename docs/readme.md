@@ -1,6 +1,6 @@
 Ace MiniMap
 
-https://ldijkman.github.io/Ace_MiniMap/ace_editor_minimap.html
+Demo https://ldijkman.github.io/Ace_MiniMap/ace_editor_minimap.html
 
 https://github.com/ldijkman/Ace_MiniMap
 
