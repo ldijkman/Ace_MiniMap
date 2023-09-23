@@ -2334,6 +2334,9 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
     // editor.setValue(` source nothing  `);
     editor.setFontSize(18);
     var Range = ace.require('ace/range').Range // get reference to ace/range
+   
+    //editor.setAutoScrollEditorIntoView(true)
+
     ace.require("ace/ext/language_tools");
     ace.require('ace/ext/ext-linking'); // not sure if this is correct ace/ext/linking
 
@@ -2348,8 +2351,11 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
 		    enableFreeSpacePreviews: true,
 	  });
 
+    editor.setOption(editor.$options.animatedScroll.name, true);
+
 
     editor.selection.clearSelection();
+    
     var myTimeout;  // for update timeout minimap
 
 
@@ -2382,6 +2388,7 @@ editor.getSession().on('change', function () {
 // minimaoeditor
 //////////////////////////////////////////////////////////
   var minimapeditor = ace.edit("minimapeditor");
+  minimapeditor.session.setMode("ace/mode/html"); 
   minimapeditor.setTheme("ace/theme/vibrant_ink");
   minimapeditor.setFontSize(2.6);
   minimapeditor.setShowPrintMargin(false);
@@ -2389,19 +2396,21 @@ editor.getSession().on('change', function () {
   minimapeditor.setReadOnly(true);
   minimapeditor.renderer.setOption('showLineNumbers', false);  
   editor.setOption("showPrintMargin", false); 
-  minimapeditor.session.setMode("ace/mode/html");
+
   minimapeditor.setValue(editor.getSession().getValue());
   minimapeditor.selection.clearSelection();
+  //minimapeditor.setOption(minimapeditor.$options.animatedScroll.name, true);
+  //minimapeditor.setAutoScrollEditorIntoView(true)
+
    
-
-
-
-
 // get linenumeber on minimap mouseclick
 minimapeditor.on('mousedown', () => {
     // mouseup works better?         
 });
 
+
+
+// get linenumeber on minimap mouseup, for set main editor cursor position 
 minimapeditor.on('mouseup', () => {       // var cursor = minimapeditor.getCursorPosition();
     var cursorrow = minimapeditor.getCursorPosition().row;
     var cursorcolumn = minimapeditor.getCursorPosition().column;
@@ -2411,35 +2420,98 @@ minimapeditor.on('mouseup', () => {       // var cursor = minimapeditor.getCurso
     ace.edit("editor").gotoLine(cursorrow,cursorcolumn);
     ace.edit("editor").moveCursorTo(cursorrow,cursorcolumn);
     console.log("getcursor row",cursorrow );
-    //minimapeditor.selection.clearSelection();
+    // minimapeditor.selection.clearSelection();
 
-
-
-  
     minimapeditor.scrollToLine(cursorrow, true, true, function () {});
     ace.edit("minimapeditor").moveCursorTo(editor.getCursorPosition());
     ace.edit("minimapeditor").gotoLine(cursorrow,cursorcolumn);
     minimapeditor.setAutoScrollEditorIntoView(true)
 
      minimapeditor.session.removeMarker(marker);
- //marker=minimapeditor.session.addMarker(new Range(editor.renderer.getFirstVisibleRow(), 0, editor.renderer.getLastVisibleRow(), 0), "ace_active-line", "fullLine");
-
-
+     // marker=minimapeditor.session.addMarker(new Range(editor.renderer.getFirstVisibleRow(), 0, editor.renderer.getLastVisibleRow(), 0), "ace_active-line", "fullLine");
 
 });
 
 
-///////////////////////////////////////////////////////////////////////////
-// arduino alike map function == Re-maps a number from one range to another. 
-// https://www.arduino.cc/reference/en/language/functions/math/map/ 
-// https://stackoverflow.com/questions/5649803/remap-or-map-function-in-javascript
-// scale range 1 into range2 bar range to 0 to 1440 minute range  
-// or 
-// scale a minutevalue in range 0 to 1440 minutes to 0% to 100%,  used for left and width of timeslot divs
-///////////////////////////////////////////////////////////////////////////////
-function map_range(value, low1, high1, low2, high2) {
-    return (low2 + (high2 - low2) * (value - low1) / (high1 - low1)).toFixed(3);   // to 3 decimals, Math.round did not scale right
-}
+
+
+
+
+
+ editor.on('mousedown', () => {
+         
+    // var cursor = minimapeditor.getCursorPosition();
+    // var cursorrow = minimapeditor.getCursorPosition().row;
+    // var cursorcolumn = minimapeditor.getCursorPosition().column;
+    // var cursorPos = $scope.editor.getCursorPosition()
+    
+    // move cursorr big editor to cursor pos minimapeditor
+    // ace.edit("editor").gotoLine(cursorrow,cursorcolumn);
+    // ace.edit("editor").moveCursorTo(cursorrow,cursorcolumn);
+    // console.log("getcursor row",cursorrow );
+
+
+    // onclick get first line of active editor window
+    // maybe for set minimap window to that cursur location
+    // but i get some span code now also
+     
+     // const collection = document.getElementsByClassName("ace_gutter-cell ");
+     // console.log("collection[0] ",collection[0]);
+     minimapeditor.selection.clearSelection();
+     minimapeditor.selection.selectLine();
+});
+
+
+
+var marker;
+// main editor info on scroll
+// set minimap linenuber from editor onscroll
+editor.session.on("changeScrollTop", function() {
+     //minimapeditor.selection.clearSelection();
+     // const collection = document.getElementsByClassName("ace_gutter-cell ");
+     // console.log("collection[0] ",collection[0].innerHTML);
+
+    // strip html from innerhtml to get linenumber
+    // should be a better way to get toplinenumber from current view
+    // var currentlinenr = (collection[0].innerHTML).replace(/(<([^>]+)>)/gi, "");
+
+    // get centerline of big editor
+    var currentlinenr = editor.renderer.getFirstVisibleRow()+((editor.renderer.getLastVisibleRow()-editor.renderer.getFirstVisibleRow())/2);
+    console.log("currentlinenr ",currentlinenr);
+
+
+    minimapeditor.scrollToLine(currentlinenr, true, true, function () {});
+    ace.edit("minimapeditor").moveCursorTo(currentlinenr);
+    ace.edit("minimapeditor").gotoLine(currentlinenr);
+
+      // minimapeditor.selection.clearSelection();
+     // minimapeditor.selection.selectLine();
+    // minimapeditor.selection.selectLine(currentlinenr+1);
+    // minimapeditor.selection.selectLine(currentlinenr+2);
+    
+    
+    
+
+	    // console.log("getFirstVisibleRow",editor.renderer.getFirstVisibleRow());
+			// console.log("getLastVisibleRow",editor.renderer.getLastVisibleRow());
+			// let nr_lines_vissible = editor.renderer.getLastVisibleRow() - editor.renderer.getFirstVisibleRow(); 
+      // document.getElementsByClassName("ace_map").innerHTML = "<div id='ace_map' style='top:" +  (map_range(editor.renderer.getFirstVisibleRow() ,0,editor.session.getLength()+nr_lines_vissible, 0,100)) + "%'></div>";
+
+
+// editor  view to grau selection on minimap
+ minimapeditor.session.removeMarker(marker);
+ marker=minimapeditor.session.addMarker(new Range(editor.renderer.getFirstVisibleRow(), 0, editor.renderer.getLastVisibleRow(), 0), "ace_active-line", "fullLine");
+
+
+})
+
+
+
+
+
+
+
+
 
 
 
@@ -2497,73 +2569,18 @@ function download(filename, text) {
 
 
 
- editor.on('mousedown', () => {
-         
-    // var cursor = minimapeditor.getCursorPosition();
-    // var cursorrow = minimapeditor.getCursorPosition().row;
-    // var cursorcolumn = minimapeditor.getCursorPosition().column;
-    // var cursorPos = $scope.editor.getCursorPosition()
-    
-    // move cursorr big editor to cursor pos minimapeditor
-    // ace.edit("editor").gotoLine(cursorrow,cursorcolumn);
-    // ace.edit("editor").moveCursorTo(cursorrow,cursorcolumn);
-    // console.log("getcursor row",cursorrow );
 
-
-    // onclick get first line of active editor window
-    // maybe for set minimap window to that cursur location
-    // but i get some span code now also
-     
-     // const collection = document.getElementsByClassName("ace_gutter-cell ");
-     // console.log("collection[0] ",collection[0]);
-     minimapeditor.selection.clearSelection();
-     minimapeditor.selection.selectLine();
-});
-
-
-
-var marker;
-// main editor info on scroll
-// set minimap linenuber from editor onscroll
-editor.session.on("changeScrollTop", function() {
-     //minimapeditor.selection.clearSelection();
-     // const collection = document.getElementsByClassName("ace_gutter-cell ");
-     // console.log("collection[0] ",collection[0].innerHTML);
-
-    // strip html from innerhtml to get linenumber
-    // should be a better way to get toplinenumber from current view
-    // var currentlinenr = (collection[0].innerHTML).replace(/(<([^>]+)>)/gi, "");
-
-    // get centerline of big editor
-    var currentlinenr = editor.renderer.getFirstVisibleRow()+((editor.renderer.getLastVisibleRow()-editor.renderer.getFirstVisibleRow())/2);
-    console.log("currentlinenr ",currentlinenr);
-
-
-    minimapeditor.scrollToLine(currentlinenr, true, true, function () {});
-    ace.edit("minimapeditor").moveCursorTo(currentlinenr);
-    ace.edit("minimapeditor").gotoLine(currentlinenr);
-    minimapeditor.setAutoScrollEditorIntoView(true)
-
-      // minimapeditor.selection.clearSelection();
-     // minimapeditor.selection.selectLine();
-    // minimapeditor.selection.selectLine(currentlinenr+1);
-    // minimapeditor.selection.selectLine(currentlinenr+2);
-    
-    editor.setAutoScrollEditorIntoView(true)
-    
-
-	    // console.log("getFirstVisibleRow",editor.renderer.getFirstVisibleRow());
-			// console.log("getLastVisibleRow",editor.renderer.getLastVisibleRow());
-			// let nr_lines_vissible = editor.renderer.getLastVisibleRow() - editor.renderer.getFirstVisibleRow(); 
-      // document.getElementsByClassName("ace_map").innerHTML = "<div id='ace_map' style='top:" +  (map_range(editor.renderer.getFirstVisibleRow() ,0,editor.session.getLength()+nr_lines_vissible, 0,100)) + "%'></div>";
-
-
-// editor view to selection on minimap
- minimapeditor.session.removeMarker(marker);
- marker=minimapeditor.session.addMarker(new Range(editor.renderer.getFirstVisibleRow(), 0, editor.renderer.getLastVisibleRow(), 0), "ace_active-line", "fullLine");
-
-
-})
+///////////////////////////////////////////////////////////////////////////
+// arduino alike map function == Re-maps a number from one range to another. 
+// https://www.arduino.cc/reference/en/language/functions/math/map/ 
+// https://stackoverflow.com/questions/5649803/remap-or-map-function-in-javascript
+// scale range 1 into range2 bar range to 0 to 1440 minute range  
+// or 
+// scale a minutevalue in range 0 to 1440 minutes to 0% to 100%,  used for left and width of timeslot divs
+///////////////////////////////////////////////////////////////////////////////
+function map_range(value, low1, high1, low2, high2) {
+    return (low2 + (high2 - low2) * (value - low1) / (high1 - low1)).toFixed(3);   // to 3 decimals, Math.round did not scale right
+}
 
 </script> 
 
