@@ -112,7 +112,7 @@ body {
 height: 150px;
 width: 150px;
 	background: darkgray;
-  opacity:50%;
+  opacity:20%;
 }
 
 
@@ -122,6 +122,10 @@ a:-webkit-any-link {
     color: lightgray;
     cursor: pointer;
     text-decoration: underline;
+}
+
+#minimapeditor .ace_active-line{
+ // oooooopacity:60%;
 }
 
 </style>
@@ -2424,7 +2428,7 @@ editor.getSession().on('change', function () {
   var minimapeditor = ace.edit("minimapeditor");
   minimapeditor.session.setMode("ace/mode/html"); 
   minimapeditor.setTheme("ace/theme/vibrant_ink");
-  minimapeditor.setFontSize(2.0);
+  minimapeditor.setFontSize(5.0);
   minimapeditor.setShowPrintMargin(false);
   minimapeditor.renderer.setShowGutter(false);
   minimapeditor.setReadOnly(true);
@@ -2453,7 +2457,7 @@ minimapeditor.on('mouseup', () => {       // var cursor = minimapeditor.getCurso
     // move cursorr big editor to cursor rom clickpos minimapeditor
     ace.edit("editor").gotoLine(cursorrow,cursorcolumn);
     ace.edit("editor").moveCursorTo(cursorrow,cursorcolumn);
-    console.log("getcursor row",cursorrow );
+   // console.log("getcursor row",cursorrow );
     // minimapeditor.selection.clearSelection();
 
     minimapeditor.scrollToLine(cursorrow, true, true, function () {});
@@ -2473,71 +2477,28 @@ minimapeditor.on('mouseup', () => {       // var cursor = minimapeditor.getCurso
 
 
  editor.on('mousedown', () => {
-         
-    // var cursor = minimapeditor.getCursorPosition();
-    // var cursorrow = minimapeditor.getCursorPosition().row;
-    // var cursorcolumn = minimapeditor.getCursorPosition().column;
-    // var cursorPos = $scope.editor.getCursorPosition()
-    
-    // move cursorr big editor to cursor pos minimapeditor
-    // ace.edit("editor").gotoLine(cursorrow,cursorcolumn);
-    // ace.edit("editor").moveCursorTo(cursorrow,cursorcolumn);
-    // console.log("getcursor row",cursorrow );
-
-
-    // onclick get first line of active editor window
-    // maybe for set minimap window to that cursur location
-    // but i get some span code now also
-     
-     // const collection = document.getElementsByClassName("ace_gutter-cell ");
-     // console.log("collection[0] ",collection[0]);
      minimapeditor.selection.clearSelection();
      minimapeditor.selection.selectLine();
 });
 
 
 
-var marker;
-// main editor info on scroll
-// set minimap linenuber from editor onscroll
+var marker; //grsy select on minimap
+
 editor.session.on("changeScrollTop", function() {
-     //minimapeditor.selection.clearSelection();
-     // const collection = document.getElementsByClassName("ace_gutter-cell ");
-     // console.log("collection[0] ",collection[0].innerHTML);
-
-    // strip html from innerhtml to get linenumber
-    // should be a better way to get toplinenumber from current view
-    // var currentlinenr = (collection[0].innerHTML).replace(/(<([^>]+)>)/gi, "");
-
-    // get centerline of big editor
-    var currentlinenr = editor.renderer.getFirstVisibleRow()+((editor.renderer.getLastVisibleRow()-editor.renderer.getFirstVisibleRow())/2);
-    console.log("currentlinenr ",currentlinenr);
-
-
-    minimapeditor.scrollToLine(currentlinenr, true, true, function () {});
-    ace.edit("minimapeditor").moveCursorTo(currentlinenr);
-    ace.edit("minimapeditor").gotoLine(currentlinenr);
-
-      // minimapeditor.selection.clearSelection();
-     // minimapeditor.selection.selectLine();
-    // minimapeditor.selection.selectLine(currentlinenr+1);
-    // minimapeditor.selection.selectLine(currentlinenr+2);
     
-    
-    
+    var s=editor.renderer.getFirstVisibleRow()
+    var e=editor.renderer.getLastVisibleRow()
+    var m = s+((e-s)/2);    // center of editor
+   
+    minimapeditor.scrollToLine(m, true, true, function () {});
+    ace.edit("minimapeditor").moveCursorTo(m);
+    ace.edit("minimapeditor").gotoLine(m);
 
-	    // console.log("getFirstVisibleRow",editor.renderer.getFirstVisibleRow());
-			// console.log("getLastVisibleRow",editor.renderer.getLastVisibleRow());
-			// let nr_lines_vissible = editor.renderer.getLastVisibleRow() - editor.renderer.getFirstVisibleRow(); 
-      // document.getElementsByClassName("ace_map").innerHTML = "<div id='ace_map' style='top:" +  (map_range(editor.renderer.getFirstVisibleRow() ,0,editor.session.getLength()+nr_lines_vissible, 0,100)) + "%'></div>";
-
-
-// editor  view to grau selection on minimap
- minimapeditor.session.removeMarker(marker);
- marker=minimapeditor.session.addMarker(new Range(editor.renderer.getFirstVisibleRow(), 0, editor.renderer.getLastVisibleRow(), 0), "ace_active-line", "fullLine");
-
-
+ minimapeditor.session.removeMarker(marker);  // grau selection on minimap
+ marker=minimapeditor.session.addMarker(new Range(s, 0, e, 0), "ace_active-line", "fullLine");
 })
+
 
 
 
