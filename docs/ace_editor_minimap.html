@@ -14,7 +14,7 @@ focus must be on editor
    F1 for shortcuts
    
    ctrl+c copy
-   ctrl+v paste
+   ctrl+v paste      (mouse mid button)
    ctrl+a selectall
    
    ctrl+f find
@@ -2408,7 +2408,7 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
     //editor.setAutoScrollEditorIntoView(true)
 
     ace.require("ace/ext/language_tools");
-    ace.require('ace/ext/ext-linking'); // not sure if this is correct ace/ext/linking
+    //ace.require('ace/ext/ext-linking'); // not sure if this is correct ace/ext/linking
 	  ace.require("ace/ext/emmet");
 
 	  editor.setOptions({
@@ -2419,11 +2419,11 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
 		    // --
 		    enableLinking: true,
 		    // --
-        enableEmmet: true,
 		    enableFreeSpacePreviews: true,
 	  });
 
     editor.setOption(editor.$options.animatedScroll.name, true);
+    editor.setOption("enableEmmet", true);
 
     // editor.selection.clearSelection();
 
@@ -2435,7 +2435,11 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
 editor.hoverLink.on("open", function() {
   // alert("trying to open")
   console.log("trying to open",editor.hoverLink.link.value);
-  window.open(editor.hoverLink.link.value);
+  
+  if(editor.hoverLink.isOpen){
+  //window.open(editor.hoverLink.link.value);
+ }
+  console.log("this.link",editor.hoverLink.isOpen);
 })
 
 
