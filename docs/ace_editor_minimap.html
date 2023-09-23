@@ -129,9 +129,17 @@ a:-webkit-any-link {
 #minimapeditor .ace_active-line{
  // oooooopacity:60%;
 }
+.ace_link_marker {
+      position: absolute;
+      border-bottom: 3px solid red;
+      background:yellow;
+      opacity:30%;
+}
 
 </style>
   
+
+
 
 </head>
 <body>
@@ -2377,7 +2385,9 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.8.0/ext-spellcheck.min.js"></script>
   
     
-    
+      <script src="https://ldijkman.github.io/Ace-Editor-Click-Link-window.open-URL/hoverlink.js"></script>  
+  <!--  https://github.com/ldijkman/Ace-Editor-Click-Link-window.open-URL/tree/main/docs -->
+
     
     
     
@@ -2399,6 +2409,7 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
 
     ace.require("ace/ext/language_tools");
     ace.require('ace/ext/ext-linking'); // not sure if this is correct ace/ext/linking
+	  ace.require("ace/ext/emmet");
 
 	  editor.setOptions({
 		    // -- ext-language_tools --
@@ -2408,10 +2419,39 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
 		    // --
 		    enableLinking: true,
 		    // --
+        enableEmmet: true,
 		    enableFreeSpacePreviews: true,
 	  });
 
     editor.setOption(editor.$options.animatedScroll.name, true);
+
+    // editor.selection.clearSelection();
+
+    HoverLink = require("hoverlink").HoverLink
+    editor.hoverLink = new HoverLink(editor);
+
+
+  
+editor.hoverLink.on("open", function() {
+  // alert("trying to open")
+  console.log("trying to open",editor.hoverLink.link.value);
+  window.open(editor.hoverLink.link.value);
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     editor.selection.clearSelection();
