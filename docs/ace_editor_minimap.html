@@ -149,10 +149,15 @@ a:-webkit-any-link {
  .ace_search  {
     border-radius: 0px 0px 0px 25px;
     border-right: 0 none;
-    right: auto; 
+ 
     cursor: move;
+    color-scheme:  dark;
+    background-color: #444444;
+    color:lightgray;
 }
-
+.ace_button {
+    color: lightgray;
+}
 
 </style>
 
@@ -211,6 +216,10 @@ a:-webkit-any-link {
 <div id="editor" onmouseover='ace.edit("editor").focus();'>
 <textarea>
 <!--
+
+ should be possible 
+      to move drag the search replace to another position on screen 
+          only still sticking to right side 
 
 Demo https://ldijkman.github.io/Ace_MiniMap/ace_editor_minimap.html
 
@@ -2489,7 +2498,20 @@ editor.hoverLink.on("open", function() {
 
 
 
+// placed this outside onchange now
+     //editor.find("function");
+// create search popup     
+      editor.execCommand("find");
+// next neds to run after popup creation        
+      $( ".ace_search" ).draggable();  // after an edit the search / replace popup is draggable 
 
+// still sticking to the right side
+
+      // https://www.tutorialspoint.com/how-to-remove-css-property-using-javascript
+      // $( ".ace_search" ).style.removeProperty("right");
+      // $( ".ace_search" ).style.right = null;
+      // $( ".ace_search.right" ).style.right = null;
+// placed this outside onchange now
 
 
 // on change main big editor change content minimap editor 5 sec delay of no change
@@ -2506,10 +2528,10 @@ editor.getSession().on('change', function () {
     ace.edit("editor").focus(); // To focus the ace editor
     ace.edit("editor").renderer.$cursorLayer.showCursor();
 
-  
-    $( ".ace_search" ).draggable();  // after an edit the search / replace popup is draggable 
-  
- 
+     
+
+    
+
 
 });
 
