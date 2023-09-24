@@ -146,9 +146,17 @@ a:-webkit-any-link {
       
 }
 
-</style>
-  
+ .ace_search  {
+    border-radius: 0px 0px 0px 25px;
+    border-right: 0 none;
+    right: auto; 
+    cursor: move;
+}
 
+
+</style>
+
+ 
 
 
 </head>
@@ -213,6 +221,8 @@ https://github.com/ldijkman/Ace_MiniMap/discussions
 https://m.facebook.com/luberth.dijkman
 
 demo video https://youtu.be/I5_UTyEQZhc
+
+video showing move search replace https://youtu.be/9rnnVYyaO0s
 
 focus must be on editor
 
@@ -2402,6 +2412,9 @@ https://search.google.com/test/mobile-friendly?url=https%3A%2F%2Fldijkman.github
 
     
     
+       <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+ 
     
     <script>
 
@@ -2492,6 +2505,11 @@ editor.getSession().on('change', function () {
 
     ace.edit("editor").focus(); // To focus the ace editor
     ace.edit("editor").renderer.$cursorLayer.showCursor();
+
+  
+    $( ".ace_search" ).draggable();  // after an edit the search / replace popup is draggable 
+  
+ 
 
 });
 
@@ -2691,6 +2709,7 @@ function map_range(value, low1, high1, low2, high2) {
 
 </script> 
 
+ 
 
 </body>
 </html>
