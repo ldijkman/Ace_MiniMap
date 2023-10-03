@@ -1,6 +1,6 @@
 Ace MiniMap
 
-Demo https://ldijkman.github.io/Ace_MiniMap/ace_editor_minimap.html
+Demo HTML Preview: https://ldijkman.github.io/Ace_Seventh_Heaven/Hell.html
 
 Source [https://github.com/ldijkman/Ace_MiniMap](https://github.com/ldijkman/Ace_MiniMap/tree/main/docs)
 
